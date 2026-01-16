@@ -1,0 +1,118 @@
+\section{Discussion}
+\label{sec:discussion}
+
+This chapter interprets the evaluation results from Chapter~7 and discusses the strengths, limitations, industrial applicability, and validity considerations of the proposed staged validation pipeline. The discussion is structured so that most arguments remain grounded in the design rationale and methodological constraints, while quantitative claims and illustrative examples are refined once the full results are available.
+
+\subsection{Summary of key findings}
+\label{sec:discussion_summary_findings}
+
+This section summarizes the main outcomes of the evaluation with a focus on stage contribution and practical usefulness.
+
+\paragraph{Structural baseline findings.} \textbf{[TO FILL AFTER RESULTS: key counts/patterns]}
+
+\paragraph{Cosine rescue impact.} \textbf{[TO FILL AFTER RESULTS: reduction in false ``missing'']}
+
+\paragraph{Pass~1 integrity and semantic adequacy.} \textbf{[TO FILL AFTER RESULTS: dominant issue types, score distribution]}
+
+\paragraph{Pass~2 cross-view consistency.} \textbf{[TO FILL AFTER RESULTS: rule categories most frequently violated]}
+
+This summary is intentionally concise (approximately one page) to provide a transition into the interpretation and implications discussed in the remainder of the chapter.
+
+\subsection{Strengths of the proposed approach}
+\label{sec:discussion_strengths}
+
+This section discusses strengths that follow directly from the pipeline design (Chapter~5) and implementation choices (Chapter~6), and that are supported by the evaluation evidence (Chapter~7).
+
+\paragraph{S1 --- Staged design improves acceptance and auditability.}
+A central strength of the approach is the decomposition into deterministic checks, similarity-based alignment, and constrained semantic auditing. Deterministic stages offer reproducibility and high precision for structural completeness, while later stages add semantic depth without sacrificing auditability due to strict schema constraints and evidence requirements. This staged design enables incremental adoption: early stages can already provide value in reporting mode, while later stages can be introduced once organizational trust is established.
+
+\paragraph{S2 --- Robustness to naming variation without sacrificing explainability.}
+The similarity layer improves robustness to practical documentation variation such as renamed headings or slightly modified section titles. Importantly, similarity is used as a mapping mechanism rather than as a proxy for quality. This preserves explainability: rescued mappings remain transparent through explicit correspondence pairs and similarity scores, and their impact on structural findings can be measured directly.
+
+\paragraph{S3 --- Guidance-aware semantic validation.}
+By attaching template guidance to each section and heading, the audit shifts from generic text evaluation toward intent-based evaluation. Semantic findings can therefore be formulated as a mismatch between normative expectation (guidance) and the provided content. This makes findings interpretable as documentation defects rather than stylistic critique.
+
+\paragraph{S4 --- Evidence-backed outputs support industrial review workflows.}
+The strict requirement that findings include verifiable evidence snippets increases trust and reduces the risk that the tool is perceived as a black-box classifier. Evidence-backed reporting supports practical review usage: reviewers can verify issues quickly and decide whether they require remediation, which is essential for adoption in time-constrained industrial workflows.
+
+\paragraph{S5 --- Cross-view consistency via intra-document traceability.}
+Pass~2 supports consistency validation even when only text-centric documentation is available. By extracting architectural entities and checking their usage across complementary arc42 views (Building Block View, Runtime View, Deployment View, and rationale-related chapters), the approach approximates an intra-document traceability perspective without requiring formal architecture models. This addresses an industrially common scenario where architecture knowledge is primarily captured in narrative form.
+
+\paragraph{Examples (to add after evaluation).}
+\textbf{[TO FILL AFTER RESULTS: Add 2--3 concrete examples demonstrating each strength, e.g., a rescued heading, a guidance mismatch with evidence, and a cross-view inconsistency case.]}
+
+\subsection{Limitations}
+\label{sec:discussion_limitations}
+
+This section discusses limitations and failure modes in an engineering-oriented manner. The goal is to clarify what the approach does \emph{not} guarantee and where misclassifications may occur.
+
+\paragraph{L1 --- Template dependence and organizational variation.}
+Validation results are normative with respect to the company’s arc42-derived reference template. Different organizations or domains may adapt arc42 differently (section selection, naming conventions, additional mandatory content), which would require updating the expected structure and guidance used by the pipeline.
+
+\paragraph{L2 --- False positives from heuristic integrity checks.}
+Deterministic emptiness detection and similarity-based heuristics can misclassify legitimate concise content as incomplete, or flag domain-specific terminology as placeholders. While conservative thresholds reduce this risk, some tuning is typically necessary and should be informed by practitioner feedback and corpus characteristics.
+
+\paragraph{L3 --- Residual non-determinism and sensitivity in LLM-based judgments.}
+Even with strict schemas, temperature settings, and evidence-only reporting, semantic judgments may vary across borderline cases and may be sensitive to prompt phrasing, model versions, and context budget decisions (e.g., truncation). The approach mitigates but cannot fully eliminate these effects, which is why run metadata and prompt/schema versioning are essential for traceability.
+
+\paragraph{L4 --- Limited understanding of diagrams and external artifacts.}
+The current pipeline primarily evaluates textual content. Diagrams, UML artifacts, and external traceability files (e.g., unit mapping files) are not fully validated unless explicitly integrated. Consequently, a document may be semantically adequate in text but still contain inconsistent or low-quality diagrams that are not detected by the current approach.
+
+\paragraph{L5 --- Consistency checks limited to what is explicitly expressed in text.}
+Entity-based consistency checks depend on explicit naming and consistent terminology. If building blocks or interfaces are implied rather than named, or if synonyms are used without clarification, cross-view rules may miss inconsistencies or may flag issues that are semantically valid but lexically divergent.
+
+\subsection{Industrial applicability and integration considerations}
+\label{sec:discussion_industrial_applicability}
+
+This section discusses how the approach can be used in practice and what integration strategies reduce organizational adoption risk.
+
+\subsubsection{Adoption path}
+A pragmatic adoption strategy is an incremental rollout:
+
+\begin{enumerate}
+    \item \textbf{Reporting mode (non-blocking):} execute the pipeline and publish findings and aggregated statistics without enforcing blocking conditions.
+    \item \textbf{Assisted review:} reviewers focus on flagged sections using evidence snippets, reducing manual effort while maintaining human oversight.
+    \item \textbf{Quality gate mode (blocking):} enforce only high-confidence rules (e.g., missing mandatory sections or unresolved placeholders) once precision is validated and organizational acceptance is established.
+\end{enumerate}
+
+\subsubsection{Integration points}
+Two primary integration points are feasible:
+\begin{itemize}
+    \item \textbf{Post-processing in an existing batch workflow:} execute the pipeline alongside existing crawlers or reporting tools to produce organization-wide documentation quality reports.
+    \item \textbf{Earlier validation as a quality gate:} run deterministic checks (and optionally selected audit rules) in CI or code review to prevent low-quality documentation from entering repositories.
+\end{itemize}
+
+\subsubsection{Practical concerns}
+Practical deployment requires addressing:
+\begin{itemize}
+    \item \textbf{Runtime and cost:} deterministic stages are typically inexpensive, while LLM passes may introduce additional latency and cost, motivating staged configuration and selective execution.
+    \item \textbf{Configuration management:} thresholds, template versions, prompt versions, and schema versions must be governed to preserve comparability over time.
+    \item \textbf{Governance and ownership:} template evolution and validation rules require clear ownership (e.g., architecture governance team) to avoid misalignment between ``expected'' content and evolving practice.
+\end{itemize}
+
+\subsection{Threats to validity}
+\label{sec:discussion_validity}
+
+This section summarizes threats to validity following standard empirical software engineering reporting conventions.
+
+\subsubsection{Construct validity}
+The reported counts and scores are proxies for documentation quality and may not capture all relevant aspects (e.g., clarity, architectural correctness, or suitability of the architecture itself). Semantic adequacy judgments are relative to template guidance; if guidance is incomplete or overly generic, adequacy checks may inherit those limitations.
+
+\subsubsection{Internal validity}
+Findings can be influenced by threshold choices (e.g., cosine thresholds, emptiness criteria, duplication thresholds), by the prompt wording and schema design used in LLM passes, and by confounding factors such as document length and domain-specific writing style. Mitigations include versioned prompts and schemas, run metadata, and persisted intermediate artifacts enabling stage-by-stage analysis. Optional sensitivity checks can further quantify the impact of threshold changes. \textbf{[TO FILL AFTER RESULTS if performed]}
+
+\subsubsection{External validity}
+Generalization may be strongest for arc42-derived documentation in similar industrial contexts. Other documentation frameworks, different arc42 variants, or domains with substantially different terminology and documentation practices may require adaptation of the reference template, guidance extraction, and rule definitions.
+
+\subsubsection{Reliability}
+Deterministic stages are fully reproducible. For LLM-based stages, reliability is supported through temperature-controlled execution, bounded and guidance-aware inputs, strict schemas, and evidence-only reporting. However, model updates and platform changes can affect outputs; therefore, recording model identifiers and prompt/schema hashes in run metadata is necessary to support reproducible comparisons over time.
+
+\subsection{Ethical, privacy, and organizational considerations}
+\label{sec:discussion_ethics}
+
+Architecture documentation may contain sensitive technical details. Processing should respect confidentiality requirements and internal policies, and audit outputs should be stored and shared according to governance rules. Evidence snippets should be limited to what is necessary for verification, minimizing unnecessary exposure of proprietary content. If audit outputs are aggregated across units, access control becomes important to ensure that results are visible only to appropriate stakeholders.
+
+\subsection{Chapter summary}
+\label{sec:discussion_summary}
+
+This chapter discussed strengths, limitations, and industrial applicability of the staged validation pipeline and analyzed threats to validity and confidentiality-related considerations. The next chapter concludes the thesis by summarizing contributions, answering the research questions, and outlining future extensions such as artifact-aware validation (e.g., diagrams/UML) and integration with additional traceability artifacts.

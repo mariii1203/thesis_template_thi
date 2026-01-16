@@ -1,0 +1,102 @@
+\section{Methodology}
+This section describes the research and engineering methodology used to design, implement, and evaluate the proposed approach for AI-based structural and semantic validation of architecture documentation. The methodology is derived from the problem framing and quality dimensions introduced in Section~2, the research gap and positioning established in Section~3, and the industrial context and requirements captured in Section~4. The central methodological objective is to construct a validation pipeline that is (i) grounded in a normative documentation framework (an arc42-derived reference template), (ii) robust to real-world variation, and (iii) capable of producing auditable, evidence-backed findings suitable for industrial use.
+
+\subsection{Research design and approach}
+The work follows an engineering-oriented research design: it develops a practical artifact (a validation toolchain) and evaluates its usefulness in an industrially relevant setting. The thesis is not positioned as a purely theoretical contribution, but as an applied approach that operationalizes documentation quality dimensions (Section~2.3) into concrete checks and outputs.
+
+Methodologically, the thesis follows a design-and-evaluate cycle:
+\begin{enumerate}
+    \item problem analysis and requirement elicitation from the industrial workflow (Section~4),
+    \item derivation of validation objectives from documentation quality dimensions and arc42 section intent (Sections~2.2--2.3),
+    \item pipeline design that decomposes the validation problem into deterministic, similarity-based, and semantic reasoning stages,
+    \item modular implementation of the pipeline,
+    \item evaluation on real architecture documentation to assess defect detection coverage, usefulness, and explainability (Section~7).
+\end{enumerate}
+
+This structure ensures that each technical choice is traceable to either the reference framework (arc42-derived template), an explicit quality dimension, or an industrial constraint (e.g., variability and false-positive risk).
+
+\subsection{Inputs, artifacts, and scope of validation}
+The validation pipeline operates on the following primary inputs:
+\begin{itemize}
+    \item \textbf{Reference template:} the company-specific arc42-derived template used as the normative baseline for structural validation and as the source of section-intent guidance.
+    \item \textbf{Architecture documentation:} AsciiDoc (\texttt{.adoc}) documents authored per software unit/subsystem and processed in the industrial environment (e.g., at SWE level).
+    \item \textbf{Parsed representation:} a normalized intermediate representation (JSON) derived from parsing the AsciiDoc files into a section/heading structure and associated content blocks.
+\end{itemize}
+
+The scope of validation in this thesis is text-centric architecture documentation. The approach does not assume the presence of formal architecture models (e.g., UML, PCM) or code-level ground truth. Consistency checking is therefore implemented as \emph{intra-document architectural traceability} across arc42 views (Section~2.3.5), rather than cross-artifact traceability (e.g., documentation-to-code). Where industrial artifacts such as unit mappings exist (e.g., a unit mapping file), these are treated as optional integration points and discussed as extensions in Section~8.
+
+\subsection{Quality model operationalization}
+Section~2.3 defined documentation quality along four dimensions: structural completeness, integrity, semantic adequacy, and cross-view consistency. This thesis operationalizes these dimensions into staged validation responsibilities:
+\begin{itemize}
+    \item \textbf{Structural completeness} $\rightarrow$ deterministic checks against the reference template structure.
+    \item \textbf{Integrity} $\rightarrow$ detection of incomplete/stub/placeholder content that can exist even when structure is present.
+    \item \textbf{Semantic adequacy} $\rightarrow$ assessment of whether section content fulfills the intent expressed in the template guidance.
+    \item \textbf{Cross-view consistency} $\rightarrow$ detection of contradictions or missing relationships across building blocks, runtime scenarios, deployment mappings, decisions, goals, and risks.
+\end{itemize}
+
+The central methodological principle is that these dimensions require different techniques. Structural completeness can be assessed deterministically, whereas semantic adequacy requires interpretation. This motivates a hybrid pipeline combining deterministic checks, similarity-based alignment, and constrained semantic auditing.
+
+% ---- Place Table B here (Quality Dimensions -> Pipeline Stages) ----
+
+\subsection{Staged validation pipeline}
+To balance determinism, robustness, and semantic depth, validation is implemented as a multi-stage pipeline. Each stage contributes a specific capability and is designed to control a specific class of failure modes.
+
+% ---- Place Mermaid Figure here (after this introductory paragraph) ----
+
+\subsubsection{Stage 0: Parsing and normalization boundary}
+Before validation, architecture documentation is parsed from AsciiDoc into a structured representation. This establishes a stable boundary between authoring formats and validation logic. The output represents sections and headings, hierarchical levels, and associated content blocks. This normalization supports reproducibility and makes subsequent reasoning explicit and traceable.
+
+\subsubsection{Stage 1: Baseline structural validation (deterministic)}
+The baseline checker validates the document structure against the reference template: required sections/headings are present, hierarchy matches the expected structure, and unmatched/extra headings are identified. This stage targets the structural completeness dimension and provides deterministic coverage of missing structure. It intentionally does not judge content adequacy.
+
+\subsubsection{Stage 2: Similarity-based alignment for naming variation}
+Real-world documents often rename or slightly modify headings. To reduce false missing-section findings caused by naming variance, the pipeline includes a similarity-based resolver that proposes alignments between unmatched document headings and template headings (candidate matching). Similarity is used for alignment, not for quality scoring. The output remains a mapping of likely correspondences that is subsequently validated by semantic checks.
+
+\subsubsection{Stage 3: Preprocessing for auditable semantic analysis}
+The pipeline produces a final preprocessed JSON representation that consolidates resolved heading alignment, extracted guidance per section, normalized content, and integrity signals. This ensures that semantic auditing consumes a stable, bounded input and supports strict output constraints.
+
+\subsubsection{Pass 1 audit: integrity and semantic adequacy (section-local)}
+Pass~1 performs section-local analysis. For each arc42 section and its headings, it identifies integrity defects (stubs, placeholders, empty headings, template remnants) and semantic mismatches (content does not satisfy the section guidance intent). Boilerplate or irrelevant content patterns are flagged where supported by evidence.
+
+The core method for Pass~1 is constrained semantic reasoning with a large language model. The model is treated as an auditor rather than a generator: outputs are restricted to a structured schema, and every reported issue must include an evidence snippet from the input. Pass~1 primarily targets the integrity and semantic adequacy dimensions.
+
+\subsubsection{Pass 2 audit: cross-view consistency (global)}
+Pass~2 performs global analysis across sections and views by extracting and comparing architectural entities and their relationships. It evaluates cross-view consistency expectations such as: runtime scenarios referencing defined building blocks, deployment sections accounting for building blocks and their mappings, decisions relating to documented goals, and risks reflecting negative consequences or trade-offs where present.
+
+Pass~2 operationalizes cross-view consistency as intra-document traceability checks: entities introduced in one view should be used coherently in others. Outputs are again evidence-based and structured.
+
+\subsubsection{Output model and auditability constraints}
+Both passes produce results as structured JSON suitable for aggregation in the crawler context. The methodology enforces two auditability principles:
+\begin{enumerate}
+    \item \textbf{Evidence-backed reporting:} every finding must include a text snippet supporting the claim.
+    \item \textbf{Bounded outputs:} the auditor may only report what is grounded in the provided content; unsupported claims are not permitted.
+\end{enumerate}
+These constraints enable practical review and reduce hallucination risk.
+
+% ---- Place Table A here (Requirements -> Pipeline Stages) ----
+% ---- Optional Table C here (Stage -> Failure Mode Prevented) ----
+
+\subsection{Scoring and interpretation model}
+To summarize findings for reporting and prioritization, each arc42 section is assigned an ordinal score (0--5). The score is not intended to be a measure of architectural quality in an absolute sense; instead, it summarizes detected documentation issues relative to the quality dimensions.
+
+A typical interpretation is:
+\begin{itemize}
+    \item \textbf{5:} content fulfills intent; no integrity or semantic defects detected,
+    \item \textbf{4:} minor issues; section largely complete and adequate,
+    \item \textbf{3:} partial adequacy; missing detail or isolated integrity issues,
+    \item \textbf{2:} significant gaps; multiple integrity/adequacy issues,
+    \item \textbf{1:} mostly missing/placeholder/boilerplate; low usefulness,
+    \item \textbf{0:} section absent when required by the reference template.
+\end{itemize}
+
+The rubric is applied consistently across documents and used in the evaluation to compare stages and identify where defects concentrate (e.g., integrity-heavy vs.\ semantic-heavy vs.\ consistency-heavy issues).
+
+\subsection{Evaluation plan (method-level overview)}
+The evaluation (Section~7) follows directly from the quality dimensions and pipeline structure. The approach is evaluated through:
+\begin{itemize}
+    \item \textbf{Defect detection coverage:} how many and which types of issues are detected at each stage,
+    \item \textbf{Stage contribution analysis:} what additional issues are found when adding similarity resolution, Pass~1 semantic auditing, and Pass~2 cross-view checks,
+    \item \textbf{Usefulness and explainability:} whether findings are actionable and verifiable via evidence snippets.
+\end{itemize}
+
+Where possible, findings are compared against manual review outcomes and practitioner expectations in the industrial context. The evaluation emphasizes practical value: a validation method is considered successful if it improves detectability and localization of documentation defects while remaining auditable and manageable for teams.

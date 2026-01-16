@@ -1,0 +1,75 @@
+\section{Industrial Context and Requirements}
+This section describes the industrial environment in which the proposed validation approach is developed, the current documentation workflow and limitations observed in practice, and the resulting requirements that shape the design of the system. The goal is to make explicit the constraints and motivations that led to the staged pipeline architecture chosen in this thesis.
+
+\subsection{Current practice and tooling}
+In the industrial context of this work, software architecture documentation is authored primarily in AsciiDoc (\texttt{.adoc}) using an arc42-derived company template (Section~2.2). Architecture documents are maintained per software unit or subsystem (e.g., SWE-level documentation) within internal repositories.
+
+A central automation component in the current workflow is a crawler tool that processes these \texttt{.adoc} documents at scale. The crawler parses architecture documentation files, generates PDF outputs, and produces statistics about detected issues per SWE. These outputs provide a high-level overview of documentation status across multiple units and support quality reporting.
+
+Despite this automation, the validation scope in practice is limited. Based on discussions with quality stakeholders (including quality management and architecture stakeholders), existing automated checks were intentionally restricted to a small subset of chapters (notably including Design Decisions ..) .This reflects a trade-off between coverage and acceptance: early automation prioritizes low-noise checks over comprehensive validation. The rationale was pragmatic: enforcing strict checks across all arc42 sections was perceived as likely to produce widespread rejections due to high variability in real documents, creating an excessive burden for teams and undermining acceptance. As a consequence, broader validation is largely conducted through manual review, and in many situations documentation is effectively trusted by default even when quality is uncertain.
+
+Overall, documentation is systematically collected and rendered (AsciiDoc $\rightarrow$ PDF), but comprehensive quality assurance remains either manual or intentionally scoped narrowly to avoid high false-positive rates and resistance from teams.
+
+\subsection{Observed challenges and constraints}
+Meeting notes and stakeholder discussions highlight several recurring challenges that directly influence tool requirements and design:
+
+\begin{enumerate}
+    \item \textbf{High variability of documentation content.}
+    Although arc42 provides a stable structure, teams vary widely in how they fill sections: level of detail, naming conventions, granularity, and terminology differ across units. A strict one-size-fits-all validation applied uniformly to all sections can therefore label many documents as non-compliant, even when they are locally considered acceptable. This risk contributed to the earlier decision to restrict automated checks to only a small subset of sections.
+
+    \item \textbf{Risk of excessive rejection and organizational burden.}
+    Stakeholders expressed that enabling validation for every section could cause most documents to be flagged, leading to continuous rework demands and reduced tool acceptance. This creates a practical constraint: validation must be accurate and explainable enough to avoid being perceived as noise. A tool that produces many false positives becomes counterproductive because teams will ignore it or circumvent it.
+
+    \item \textbf{Reliance on manual review and implicit trust.}
+    Manual review processes exist, but feasibility is limited across many SWEs and under time pressure. In practice, architecture documentation is often trusted without deep verification, which aligns with the broader phenomenon of documentation debt: shortcomings persist when validation is costly or unclear, and problems become visible only late in development or maintenance.
+
+    \item \textbf{Need for traceability-related artifacts (e.g., unit mapping).}
+    Stakeholder notes indicate an emphasis on unit mapping and on verifying certain presence relationships. While the exact artifact and rationale must be confirmed, the underlying requirement is clear: architecture documentation should remain connected to technical structuring artifacts that establish traceability of architectural units and responsibilities. This aligns with cross-view consistency expectations (Section~2.3), where building blocks and units should be representable and traceable across views and supporting artifacts.
+
+    \item \textbf{Workflow integration constraints.}
+    The crawler currently evaluates documents after they exist in repositories, producing PDFs and statistics. A natural extension—raised during this work—is whether validation could act earlier as a quality gate (e.g., prior to uploading or merging), preventing low-quality documentation from entering the repository. This introduces a key practical requirement: validation must be automatable, stable, and produce results that developers can act on quickly.
+\end{enumerate}
+
+These constraints collectively motivate the design principles behind the proposed solution: staged validation, explainable outputs, and a balance between strictness and robustness to avoid rejecting documents purely due to naming or structural variation.
+
+\subsection{Functional requirements}
+Based on the current workflow and constraints, the system developed in this thesis is designed to satisfy the following functional requirements:
+
+\begin{description}
+    \item[FR1 --- Template-based structural validation.] The system shall validate an architecture document against the company’s arc42-derived reference template, detecting missing required sections/headings and unexpected extras.
+
+    \item[FR2 --- Robust alignment under naming variation.] The system shall support renamed or slightly altered headings by proposing alignments between template sections and document headings, reducing false missing-section detections caused by naming differences.
+
+    \item[FR3 --- Integrity validation of content.] The system shall detect incomplete documentation content such as empty headings, placeholders, and \texttt{TODO}/\texttt{TBD}-style stubs, including template remnants that create a false impression of completeness.
+
+    \item[FR4 --- Semantic adequacy validation against section intent.] The system shall evaluate whether the content in each section fulfills the expected architectural intent implied by the reference template guidance, and flag cases where content is irrelevant, boilerplate, or does not address the concern.
+
+    \item[FR5 --- Cross-section consistency validation.] The system shall extract key architectural entities (e.g., units/building blocks, interfaces, external systems, stakeholders when present) and validate their consistent usage across relevant arc42 views, such as:
+    \begin{itemize}
+        \item entities used in runtime scenarios should correspond to defined building blocks,
+        \item deployment descriptions should account for key building blocks (mapping),
+        \item decisions should be consistent with stated goals (where documented),
+        \item risks should reflect negative consequences of decisions (where available).
+    \end{itemize}
+
+    \item[FR6 --- Evidence-backed findings.] For every reported issue, the system shall provide evidence in the form of a relevant text snippet and location context (section/heading), so that reviewers can verify findings quickly.
+
+    \item[FR7 --- Machine-readable audit output.] The system shall produce a structured output (JSON) that can be consumed by downstream tools (dashboards, reports, CI pipelines) and aggregated across multiple SWEs.
+
+    \item[FR8 --- Batch processing across multiple documents.] The system shall support execution across many SWE documents (crawler-style processing) and produce per-document and aggregated results (e.g., error statistics per SWE).
+\end{description}
+
+\subsection{Non-functional requirements}
+To be viable in the given industrial workflow—especially if used as a quality gate—the following non-functional requirements are central:
+
+\begin{description}
+    \item[NFR1 --- Explainability and auditability.] Outputs must be interpretable by engineers and quality stakeholders. Findings must be traceable to evidence rather than opaque scores, supporting trust and adoption.
+
+    \item[NFR2 --- Robustness with controlled strictness.] Validation must tolerate reasonable variation (e.g., renamed headings) while remaining strict enough to detect real quality issues. The tool should minimize false positives to avoid overwhelming teams.
+
+    \item[NFR3 --- Reproducibility and determinism where possible.] Repeated runs on the same input should yield consistent results, particularly for structural checks and integrity checks. Where probabilistic methods are used, outputs should be constrained and structured.
+
+    \item[NFR4 --- Scalability to organizational usage.] The tool should be efficient enough to run across many SWE documents as part of the existing crawler process, enabling organization-wide monitoring rather than single-document analysis only.
+
+    \item[NFR5 --- Integration friendliness.] The system should integrate into existing pipelines (e.g., crawler or pre-merge quality gate) with minimal friction: simple input formats (AsciiDoc/JSON), machine-readable output, and clear error reporting.
+\end{description}

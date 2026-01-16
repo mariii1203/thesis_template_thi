@@ -1,0 +1,167 @@
+\section{Background and Theory}
+This section introduces the theoretical foundations required for the remainder of the thesis. First, it summarizes core concepts of software architecture documentation, including stakeholder concerns, viewpoints, and the rationale for multi-view architecture descriptions. Second, it introduces arc42 as the documentation template family underlying the company-specific reference template used in this work. Finally, it defines the documentation quality dimensions operationalized by the proposed validation pipeline—structural completeness, integrity, semantic adequacy, and cross-view consistency—which are later used to derive requirements, guide implementation, and interpret evaluation results.
+
+\subsection{Software Architecture Documentation Fundamentals}
+Software architecture documentation captures architectural structures, decisions, and constraints in a form that supports communication, review, and evolution over time. A key framing is provided by ISO/IEC/IEEE 42010, which characterizes an \emph{architecture description} as a structured set of information that identifies relevant stakeholders and their concerns and organizes the description into one or more \emph{views} governed by corresponding \emph{viewpoints} \cite{iso42010,iso_architecture_ads}. This perspective is particularly relevant in industrial contexts, where architecture documentation often serves as the primary boundary object across teams, roles, and organizational interfaces.
+
+\subsubsection{Stakeholders, concerns, viewpoints, and views}
+In ISO/IEC/IEEE 42010 terminology, a \emph{stakeholder} is an individual, group, or organization with an interest in the system, and a \emph{concern} represents an interest that is important from an architectural perspective (e.g., modifiability, deployment constraints, operational behavior, integration interfaces) \cite{iso42010,iso_architecture_ads}. A \emph{viewpoint} specifies conventions for constructing and using a view, while a \emph{view} presents architecture information addressing particular concerns under that viewpoint \cite{iso42010}. This decomposition is important because it makes explicit that architecture documentation is not a single artifact (such as one diagram), but rather a curated set of representations aimed at different questions and decision needs.
+
+\subsubsection{Rationale for multi-view architecture documentation}
+A central principle of architecture documentation is that no single representation can address all stakeholder concerns adequately. Multi-view documentation structures architectural knowledge into complementary slices and thereby improves navigability and reviewability. A widely cited example is Kruchten’s ``4+1'' view model, which illustrates how multiple views (e.g., logical, development, process, physical) and scenario-based validation together provide a more complete and stakeholder-relevant architecture description than a single view \cite{kruchten_4plus1}. More generally, multi-view approaches align with standards-based guidance: views exist to ensure that the documentation systematically addresses architecturally significant concerns for relevant stakeholders \cite{iso42010}.
+
+\subsubsection{Why architecture documentation quality degrades in practice}
+Even when templates and standards are used, documentation quality often degrades during system evolution. Empirical evidence from industrial surveys indicates that architecture documentation is frequently perceived as outdated, updated with delays, and inconsistent in form and detail, which reduces trust and limits practical use \cite{naab_sad_survey}. Such degradation can be understood as a form of documentation-related technical debt: documentation technical debt has been described as problems in documentation such as missing, inadequate, or incomplete artifacts that impose downstream costs on comprehension, coordination, and maintenance \cite{mendes_doc_td}. In industrial settings, this is reinforced by pragmatic constraints (time pressure, unclear ownership, high variability across teams), which can lead to partially filled sections, residual template instructions, and unmaintained cross-references between views.
+
+\subsubsection{From documentation to validation needs}
+Because architecture documentation is both a communication artifact and an engineering control instrument, quality assessment must go beyond the presence of headings. Template-based documentation provides a strong baseline for structural completeness, but multi-view documentation introduces additional quality obligations: each view should fulfill its intended purpose, and views should be coherent with one another. The view/viewpoint framing in ISO/IEC/IEEE 42010 makes this explicit: views are included to address stakeholder concerns, which implies that quality must consider not only \emph{structure} (whether required elements exist) but also \emph{meaning} (whether the content actually addresses its intended concerns) and \emph{consistency} (whether related views contradict each other) \cite{iso42010}. These needs directly motivate the staged validation approach in this thesis, which combines deterministic structural checks with guidance-aware semantic auditing and cross-view consistency validation.
+
+\subsection{arc42 as an Engineering Standard for Architecture Documentation}
+This thesis builds on arc42 as the conceptual and structural basis for the reference architecture documentation template used in the industrial case study. arc42 is a pragmatic, experience-based template intended to support the documentation and communication of software and system architectures across technologies and tooling environments \cite{arc42_overview}. Compared to informal and unstructured documentation, arc42 can be understood as an engineering-oriented contract: it defines which architectural concerns should be documented and where they belong, thereby enabling consistent communication and review across stakeholders.
+
+\subsubsection{Purpose and characteristics of arc42}
+arc42 is designed to make architecture documentation efficient and effective by providing (i) a standardized structure and (ii) embedded guidance on what to document in each part of the architecture description \cite{arc42_overview,arc42_template}. The template is intentionally practical: it aims to support understandability and adequacy of documentation without imposing unnecessary overhead. For this thesis, two characteristics are particularly relevant:
+
+\begin{itemize}
+    \item \textbf{Template-driven structure:} arc42 defines a canonical hierarchy of sections and headings to ensure that the most important architectural concerns are addressed systematically.
+    \item \textbf{Guidance as normative intent:} arc42 includes explanatory prompts and recommendations that describe the intended purpose of each section. These guidance texts can be interpreted as explicit expectations about the type of content a section should contain.
+\end{itemize}
+
+This combination makes arc42 suitable not only as an authoring aid, but also as a basis for systematic validation: structural checks can validate presence and hierarchy, while semantic checks can compare section content against its intended purpose.
+
+\subsubsection{Core structure and the arc42 section model}
+arc42 organizes architecture documentation into a sequence of sections that together cover the key concerns required to understand and assess a system architecture \cite{arc42_template}. The canonical structure includes (among others) the following major sections: Introduction and Goals, Constraints, Scope and Context, Solution Strategy, Building Block View, Runtime View, Deployment View, Cross-cutting Concepts, Architecture Decisions, Risks and Technical Debt, and Glossary.
+
+This structure aligns with common architectural reasoning processes:
+\begin{itemize}
+    \item \textbf{Goals and constraints} define the drivers and boundaries of the system (why the architecture exists and which constraints must be respected).
+    \item \textbf{Scope and context} positions the system relative to external actors and neighboring systems, including interfaces.
+    \item \textbf{Solution strategy} captures overarching architectural ideas and high-level decisions.
+    \item \textbf{Building Block View} describes static decomposition into building blocks and their dependencies.
+    \item \textbf{Runtime View} complements static decomposition by documenting behavior and interactions through scenarios.
+    \item \textbf{Deployment View} describes infrastructure and execution environments and—where applicable—maps software building blocks to infrastructure elements.
+\end{itemize}
+
+By combining complementary views, arc42 supports a holistic architecture description that is both navigable for stakeholders and reviewable for coherence.
+
+\subsubsection{Guidance as embedded quality expectations}
+A key feature of arc42 is that it not only defines headings but also provides guidance describing what should be included in each section \cite{arc42_template}. For example, the Runtime View guidance describes scenario-based documentation of interactions between building blocks, such as important use cases, critical interface interactions, operational flows, and error scenarios. The Building Block View is framed as describing static decomposition and dependencies. The Deployment View guidance clarifies when deployment documentation is necessary and emphasizes documenting relevant environments and mappings.
+
+In addition to high-level guidance, arc42 provides examples and practical tips. From the perspective of validation, these embedded instructions can be interpreted as quality expectations: they define what adequate section content typically looks like. This becomes foundational for semantic validation in later stages of the pipeline, where the document is checked not only for the presence of headings but also for whether the content fulfills the architectural purpose implied by arc42.
+
+\subsubsection{Tooling, formats, and single-source template maintenance}
+arc42 is available in multiple formats (e.g., AsciiDoc, Markdown, Word), which supports adoption in different toolchains \cite{arc42_template}. The availability of a structured, machine-processable source format is relevant for this work: a stable template representation can be parsed, normalized, and used as a canonical reference for both structural validation and guidance extraction.
+
+\subsubsection{Implications for this thesis: arc42 as a validation backbone}
+arc42 is a suitable backbone for AI-based structural and semantic validation because it provides:
+\begin{itemize}
+    \item \textbf{A canonical structure} (what should exist and where), enabling deterministic structural checks.
+    \item \textbf{Explicit intent per section} through guidance, enabling semantic adequacy checks (content should fulfill the section’s architectural purpose).
+    \item \textbf{A multi-view organization} (static building blocks, dynamic runtime scenarios, and infrastructure/deployment), enabling cross-view consistency checks grounded in well-defined sections.
+    \item \textbf{A structured, machine-processable template form}, enabling reproducible parsing and automated processing.
+\end{itemize}
+
+\paragraph{Template variant used in this thesis.}
+While arc42 provides the conceptual foundation and canonical section model, the validation performed in this thesis is based on the \emph{company-specific} arc42-derived template used in the industrial environment of the case study. This template follows the arc42 structure but may include adaptations such as organization-specific headings, additional constraints, or specialized guidance. Therefore, throughout this thesis, the term \emph{reference template} refers to the company template as the normative baseline for validation, while arc42 is cited as the underlying documentation framework that motivates the structure, intent, and multi-view organization of the architecture documentation.
+\subsection{Quality Dimensions of Architecture Documentation}
+Architecture documentation is an engineering artifact that communicates architectural intent across stakeholders and across time. Even when a system is well designed, poor documentation can undermine implementation and evolution by causing misunderstandings, inconsistent decisions, and architectural drift. In industrial practice, architecture descriptions frequently become inconsistent or outdated, reducing their usefulness and leading practitioners to rely on informal knowledge instead of documented architecture. Wohlrab et al.\ report that architectural inconsistencies evolve during system evolution and that architecture descriptions are not always trusted or used to the extent intended \cite{wohlrab_icsa19_guidelines}. In parallel, empirical work on documentation technical debt characterizes documentation shortcomings (e.g., non-existent, inadequate, or incomplete documentation) as a recurring form of debt that imposes downstream costs on comprehension and maintenance \cite{mendes_doc_td}.
+
+This thesis aims to enhance software design quality by improving the reliability of the architectural knowledge captured in documentation. The claim is not that validation directly improves source code quality, but that it increases the dependability of the architecture description that guides design decisions, implementation, and review. To make this claim precise and evaluable, documentation quality is defined through operational dimensions that reflect both template compliance and architectural meaning.
+
+\subsubsection{Multi-view nature of architecture documentation}
+Architectural knowledge is inherently multi-perspective. ISO/IEC/IEEE 42010 formalizes architecture description in terms of stakeholders, concerns, viewpoints, and views, emphasizing that architecture should be described through multiple complementary representations rather than a single narrative \cite{iso42010}. arc42 follows the same principle by structuring documentation into sections that address different concerns (e.g., goals, constraints, context, building blocks, runtime scenarios, deployment, and rationale).
+Because architectural knowledge is distributed across multiple views, documentation quality must capture more than the existence of chapters. Quality must reflect whether the document is complete, whether each section fulfills its intended purpose, and whether the overall description remains coherent across views.
+
+\subsubsection{Structural completeness}
+Structural completeness describes whether an architecture document fulfills the structural obligations of its documentation framework. In this thesis, the arc42-derived reference template serves as the normative baseline: a document is structurally complete if all required sections (and expected heading hierarchies) are present and organized consistently with the template.
+Structural completeness is a necessary condition for quality because missing sections imply missing architectural concerns (e.g., an absent deployment view obscures operational assumptions). However, structural completeness alone cannot guarantee that the documented content is meaningful, which motivates additional quality dimensions.
+
+\subsubsection{Integrity of documented content}
+Integrity captures whether a section contains authentic, authored architectural content rather than incomplete or misleading artifacts (e.g., empty headings, placeholders, residual template instructions). Integrity matters because incomplete or template-like content can create a false impression of completeness: the structure exists, but the architectural knowledge is absent.
+The documentation debt perspective reinforces that such shortcomings are common and often persist unless systematically detected and addressed \cite{mendes_doc_td}. Therefore, integrity is treated as a distinct dimension: a document can be structurally complete while still exhibiting low integrity if its sections are not meaningfully authored.
+
+\subsubsection{Semantic adequacy to section intent}
+Semantic adequacy describes whether the content in a section fulfills the architectural purpose expected by the documentation framework. In arc42-derived templates, each section is associated with guidance that describes the intended content (e.g., runtime scenarios should describe interactions; building blocks should describe decomposition and dependencies; deployment should describe environments and mappings). A section may contain text yet still be semantically inadequate if it remains generic, irrelevant to the intended concern, or does not provide decision-relevant architectural information.
+Accordingly, this thesis treats semantic adequacy as a validation objective distinct from structural checks: it assesses whether documented content is fit for the architectural intent of the section, not simply whether text exists.
+
+\subsubsection{Cross-view consistency and intra-document traceability}
+Cross-view consistency captures whether the architecture description remains coherent across sections. Given the multi-view nature of architecture documentation, views should not contradict one another and should reference compatible architectural entities. For example, elements introduced in the building block view should provide the basis for runtime scenarios; deployment descriptions should account for major building blocks; design decisions should relate to documented goals; and risks should reflect documented trade-offs. As documented in empirical work, inconsistencies reduce trust and contribute to documentation underuse \cite{wohlrab_icsa19_guidelines}.
+
+A related research line demonstrates that mismatches across artifacts can be detected by recovering links between elements in different representations. For example, ArDoCo detects inconsistencies between natural-language software architecture documentation and formal architecture models by recovering trace links and flagging elements that appear in one artifact but not the other \cite{ardoco_icsa23_inconsistency_detection}. While this thesis does not assume the availability of formal architecture models, the underlying principle is directly relevant: documentation quality depends on identifiable relationships between architectural entities and their consistent usage across views.
+
+Accordingly, this thesis uses the term \emph{intra-document architectural traceability} to refer to recoverable relationships \emph{within} an arc42 document (e.g., entities referenced across building block, runtime, and deployment views; rationale linked to goals and risks). Cross-view consistency is validated by reconstructing and checking these relationships.
+
+\subsubsection{From quality dimensions to measurable ``enhancement''}
+To justify the thesis claim of ``enhancing'' design quality through validation, enhancement must be observable. Within the scope of this work, enhancement is defined as an increased ability to \emph{detect and localize} documentation defects along the four quality dimensions above: structural completeness, integrity, semantic adequacy, and cross-view consistency. This definition supports evaluation in later sections by enabling stage-wise comparison (e.g., which defects are found by structural analysis alone versus which require semantic validation or cross-view consistency checks). The result is a documentation audit that makes quality issues explicit and actionable, enabling architects and teams to improve the reliability of the architecture description over time.
+\subsection{Validation Terminology and Core Concepts}
+This section defines the key validation concepts used throughout the thesis. The goal is to establish precise terminology so that later sections (methodology, implementation, evaluation) can refer to a shared set of definitions without repeating explanations.
+
+\subsubsection{Structural validation}
+Structural validation assesses whether a document conforms to an expected structure. In the context of arc42-derived architecture documentation, this primarily includes:
+\begin{itemize}
+    \item presence of required sections and mandatory headings,
+    \item correctness of heading hierarchy (e.g., section--subsection nesting),
+    \item detection of additional sections/headings that are not mapped to the reference template.
+\end{itemize}
+
+Structural validation is \emph{normative}: it is evaluated against a reference template (Section~2.2) and does not require judging whether the content is meaningful. Its primary strengths are determinism and explainability (missing/extra elements are directly verifiable). Its main limitation is that structural conformance does not guarantee usefulness or completeness of the documented architectural knowledge.
+
+\subsubsection{Content integrity}
+Integrity refers to whether documented content is genuinely authored and ``real,'' rather than incomplete, placeholder-based, or residual template material. Integrity defects are common in template-driven documentation and include:
+\begin{itemize}
+    \item empty headings (present but without substantive content),
+    \item unfilled placeholders (e.g., \texttt{<Name ...>}, \texttt{\_<...\>\_}),
+    \item \texttt{TODO}/\texttt{TBD} markers indicating incomplete writing,
+    \item copied template guidance left as section content.
+\end{itemize}
+
+Integrity validation sits between structural and semantic validation: it can be partly rule-based (e.g., placeholder patterns), but it also benefits from contextual interpretation (e.g., distinguishing architecture content from instructions).
+
+\subsubsection{Semantic adequacy (fit to intent)}
+Semantic adequacy evaluates whether the content in a section fulfills the intent of that section as defined by the template guidance. For example:
+\begin{itemize}
+    \item a \emph{Runtime View} should describe runtime scenarios and interactions, not merely list components,
+    \item a \emph{Deployment View} should describe environments and mappings of software elements to infrastructure, rather than remaining purely generic,
+    \item a \emph{Design Decisions} section should record decisions and rationale, not only contain headings.
+\end{itemize}
+
+Semantic adequacy is not an absolute judgment of whether the architecture is ``good.'' Instead, it evaluates whether the documentation content matches the architectural purpose of the section. This aligns with the stakeholder/concern basis of architecture descriptions: views exist to address specific concerns, therefore adequacy means addressing those concerns \cite{iso42010}.
+
+\subsubsection{Cross-view consistency}
+Architecture documentation is inherently multi-view. Cross-view consistency is the property that information across views does not contradict and remains coherent. In arc42-derived documentation, typical consistency expectations include:
+\begin{itemize}
+    \item elements referenced in runtime scenarios should be defined as building blocks/units in the Building Block View,
+    \item deployment descriptions should account for key building blocks and how they are deployed,
+    \item design decisions should be compatible with stated quality goals (when both are documented),
+    \item risks/technical debt should reflect documented negative consequences or trade-offs of decisions (when present).
+\end{itemize}
+
+Consistency validation therefore checks relationships across sections rather than analyzing sections in isolation.
+
+\subsubsection{Traceability vs.\ consistency}
+While closely related, traceability and consistency are not identical:
+\begin{itemize}
+    \item \textbf{Traceability} refers to the existence of links between artifacts or elements (e.g., requirement $\rightarrow$ architectural decision $\rightarrow$ component). In documentation auditing, traceability typically means that entities introduced in one location can be followed and located elsewhere, supporting navigation and accountability.
+    \item \textbf{Consistency} refers to the absence of contradictions and the presence of coherent alignment across views (e.g., runtime scenarios do not refer to undefined components).
+\end{itemize}
+
+In this thesis, Pass~2 operationalizes an intra-document traceability perspective as a means to detect cross-view consistency issues (i.e., extracting entities and validating consistent references across sections).
+
+\subsubsection{False positives and false negatives in documentation auditing}
+Any automated validation method can produce classification errors:
+\begin{itemize}
+    \item a \textbf{false positive} flags an issue where none exists (e.g., concise but valid content treated as empty; domain-specific terms mistaken as placeholders),
+    \item a \textbf{false negative} misses a real issue (e.g., subtle guidance mismatch not detected; inconsistency implied but not explicitly stated).
+\end{itemize}
+
+In industrial settings, false positives are particularly costly because they reduce trust and adoption. This motivates a conservative staged approach and evidence-backed reporting, even if some subtle issues remain undetected.
+
+\subsubsection{Evidence-backed validation and auditability}
+A central requirement of this thesis is that validation results remain auditable. An output is considered auditable if:
+\begin{enumerate}
+    \item every finding is grounded in the document content (no external assumptions),
+    \item evidence snippets allow a reviewer to verify the claim quickly,
+    \item the output is structured and reproducible, enabling aggregation and comparison across documents and runs.
+\end{enumerate}
+
+This motivates structured JSON outputs with evidence fields and stage-wise intermediate artifacts (Sections~5--6).

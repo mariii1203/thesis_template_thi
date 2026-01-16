@@ -1,0 +1,84 @@
+\glsdefs@newdocentry{abs}%
+{%
+name={abs},%
+sort={abs},%
+type={main},%
+first={abs},%
+firstplural={abss},%
+text={abs},%
+plural={abss},%
+description={Absolute operation},%
+descriptionplural={Absolute operation},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={},%
+longplural={},%
+short={},%
+shortplural={},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{d}%
+{%
+name={\acronymfont {\glsentryshort {d}}},%
+sort={D},%
+type={acronym},%
+first={D},%
+firstplural={Ds},%
+text={D},%
+plural={Ds},%
+description={Dimensions},%
+descriptionplural={Dimensions},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Dimensions},%
+longplural={Dimensionss},%
+short={D},%
+shortplural={Ds},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{rgb}%
+{%
+name={\acronymfont {\glsentryshort {rgb}}},%
+sort={RGB},%
+type={acronym},%
+first={RGB},%
+firstplural={RGBs},%
+text={RGB},%
+plural={RGBs},%
+description={Red Green Blue channels},%
+descriptionplural={Red Green Blue channels},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Red Green Blue channels},%
+longplural={Red Green Blue channelss},%
+short={RGB},%
+shortplural={RGBs},%
+counter={page},%
+parent={},%
+%
+}%
+

@@ -1,0 +1,209 @@
+\section{System Architecture and Implementation}
+The implementation of the staged validation pipeline introduced in Section~5 is organized into modular components that correspond to the pipeline stages (baseline structural validation, similarity-based alignment, preprocessing for semantic auditing, and the audit passes). The design goal of the implementation is twofold: (i) to keep deterministic stages fully reproducible and explainable, and (ii) to provide the audit passes with an auditable, bounded input representation that enables evidence-backed findings.
+
+\subsection{Implementation overview and module structure}
+The implementation is structured around three core Python modules that realize Stages~0--3 of the pipeline:
+
+\begin{itemize}
+    \item \texttt{baseline\_check.py}: implements Stage~1 deterministic validation against the reference template (structural completeness and integrity signals such as empty/stub detection).
+    \item \texttt{cosine\_tfidf\_layer.py}: implements Stage~2 similarity-based alignment and additional integrity heuristics (rename rescue, placeholder detection via similarity, template-content detection, and duplicate-content detection).
+    \item \texttt{llm\_preprocess.py}: implements Stage~3 preprocessing, consolidating deterministic and similarity findings into a single normalized JSON payload with guidance attached, ready for Pass~1 and Pass~2 auditing.
+\end{itemize}
+
+The pipeline produces layered intermediate artifacts per document, enabling stage-wise inspection and evaluation:
+\begin{enumerate}
+    \item \texttt{baseline\_report\_\textless doc\_id\textgreater.json}
+    \item \texttt{cosine\_resolved\_report\_\textless doc\_id\textgreater.json}
+    \item \texttt{preprocessed\_\textless doc\_id\textgreater.json}
+\end{enumerate}
+This layered output supports debugging and enables the stage-contribution analysis reported in Section~7.
+
+\subsection{Data model and intermediate representations}
+All stages operate on a consistent JSON structure representing parsed AsciiDoc documents. In the parsed representation (e.g., \texttt{car\_siriussxm360.json}), each document contains a list of sections; each section contains headings; each heading contains:
+\begin{itemize}
+    \item \texttt{text} (heading title),
+    \item \texttt{level} (heading level; e.g., 2 for top-level arc42 chapters),
+    \item \texttt{type} (static/placeholder/other classification from parsing),
+    \item \texttt{raw\_text} (content associated with the heading),
+    \item optional artifact flags (e.g., \texttt{has\_table}, \texttt{has\_diagram}).
+\end{itemize}
+
+The reference template is represented in \texttt{expected\_spec.json}. It defines expected top-level sections and headings, their types (static vs.\ placeholder), requiredness, and the guidance text later used for semantic adequacy checks. By representing both template and document in the same structural model, matching and guidance attachment remain deterministic and explainable.
+
+\subsection{Stage 1: Baseline structural validation (\texttt{baseline\_check.py})}
+The baseline checker implements the deterministic validation described in Section~5.4.2. A key design choice is that this stage remains normative and reproducible, avoiding probabilistic decisions.
+
+\subsubsection{Normalization strategy}
+Section and heading matching is performed using strict normalization:
+\begin{itemize}
+    \item trimming whitespace,
+    \item removing trailing heading markers and syntax noise,
+    \item lowercasing titles.
+\end{itemize}
+This ensures that superficial formatting differences do not produce false ``missing'' results.
+
+\subsubsection{Mandatory section and static heading checks}
+The validator loads the reference template (\texttt{expected\_spec.json}) and identifies mandatory Level-2 sections (arc42 main chapters). For each expected section, it checks whether the parsed document contains a matching section title. For matched sections, it checks the presence of required static sub-headings and reports:
+\begin{itemize}
+    \item missing mandatory sections,
+    \item missing static headings,
+    \item extra sections,
+    \item unmatched sample headings.
+\end{itemize}
+The result is returned in a report containing a baseline summary, structural gaps, and an audit trail for traceability.
+
+\subsubsection{Integrity signal: ``empty heading'' detection}
+Although Stage~1 is primarily structural, it additionally computes an integrity signal indicating whether a heading is effectively empty. The \texttt{\_is\_empty()} function treats a heading as non-empty if it includes engineering artifacts (diagram/table flags). Otherwise, it strips AsciiDoc syntax and removes recognized placeholder patterns (e.g., \texttt{\textless ...\textgreater}, \texttt{\_ \textless ...\textgreater \_}) and common stub markers (e.g., \texttt{TODO}, \texttt{TBD}). A heading is flagged as effectively empty when the remaining content falls below a minimal-length threshold. This check is intentionally conservative: it does not claim semantic adequacy, but flags content likely to be incomplete.
+
+\subsubsection{Explainability: audit trail}
+The baseline report includes an \texttt{audit\_trail} per matched section, listing each heading with normalized matching status (e.g., static match vs.\ placeholder vs.\ extra), emptiness signals, and artifact flags. This audit trail is reused in preprocessing to attach deterministic status to each heading in the final audit package.
+
+\subsection{Stage 2: Similarity-based alignment and integrity heuristics (\texttt{cosine\_tfidf\_layer.py})}
+The cosine similarity layer implements Stage~2 from Section~5.4.3. Its purpose is to improve robustness under real-world naming variation while keeping decisions inspectable.
+
+\subsubsection{Vectorization choice}
+The implementation uses a TF-IDF vectorizer configured for character n-grams (1--3). Character n-grams are more robust than word-level tokens for minor spelling variation, compound words, and naming differences common in heading titles. The vectorizer is fit on template-derived texts, including section titles, placeholder headings, and guidance texts extracted from the reference template, thereby creating a stable comparison space.
+
+\subsubsection{Section rescue mapping for renamed headings}
+To reduce false ``missing mandatory section'' reports, the resolver matches missing template sections to extra sections found in the document. It computes cosine similarity between missing template section titles and extra document section titles and, when similarity exceeds a defined threshold, records a rescue mapping (document title $\rightarrow$ template title) with a similarity score. The mapping is treated as an alignment hypothesis used later in preprocessing rather than as a quality score.
+
+\subsubsection{Similarity-based integrity checks}
+In addition to rename rescue, the module implements three integrity-related heuristics:
+\begin{enumerate}
+    \item \textbf{Unfilled placeholder heading detection.} Placeholder headings from the template are embedded and compared to document heading titles. If similarity exceeds a high threshold, the heading is flagged as an unfilled placeholder, capturing cases where template slots were never replaced.
+    \item \textbf{Template guidance left in content (copy/paste detection).} For headings with sufficient body text, the resolver compares heading content to the corresponding template guidance. If similarity is extremely high, the content is flagged as copied template guidance. This rule is conservative and triggers only under near-verbatim similarity.
+    \item \textbf{Duplicate content across headings.} A cosine similarity matrix is computed across longer prose blocks. Pairs above a high similarity threshold are flagged as potential duplicates, supporting copy/paste detection across unrelated sections.
+\end{enumerate}
+
+\subsubsection{Special-case handling: legal note}
+The implementation includes a targeted rule for the legal note, where reuse of template license text is expected. If similarity to the template license content falls below a threshold, a warning is emitted. This illustrates how the framework can support section-specific policies where template reuse is intended and appropriate.
+
+\subsubsection{Output}
+The cosine layer outputs a summary (counts of rescued sections, integrity violations, duplicates) and a detailed analysis including rescue mappings and integrity/duplicate violations.
+
+\subsection{Stage 3: Preprocessing for audit-ready input (\texttt{llm\_preprocess.py})}
+The preprocessing layer implements Stage~3 from Section~5.4.4. Its objective is to unify earlier findings into a single representation that is (i) stable, (ii) bounded, and (iii) guidance-aware.
+
+\subsubsection{Consolidation of signals}
+The preprocessor loads the reference template, the parsed document, the baseline report, and the cosine report. It constructs lookups for integrity violations keyed by section/heading and for rescue mappings keyed by template section titles. Baseline deterministic statuses are also attached per heading to preserve explainability.
+
+\subsubsection{Guidance attachment strategy}
+For each template section, the preprocessor includes section-level guidance and a list of headings to audit. Guidance is attached hierarchically:
+\begin{enumerate}
+    \item heading-specific guidance from the template (if available),
+    \item otherwise section-level guidance,
+    \item otherwise a generic fallback guidance string.
+\end{enumerate}
+This ensures that every heading has an explicit ``expected intent'' field, enabling later semantic adequacy evaluation.
+
+\subsubsection{Final audit package format}
+The resulting JSON contains \texttt{document\_metadata} and a \texttt{sections\_to\_audit} array. For each template section it includes presence status (\texttt{FOUND}/\texttt{MISSING}), guidance, and a list of headings containing:
+\begin{itemize}
+    \item heading text and level,
+    \item baseline structural status (e.g., static match, extra, placeholder),
+    \item integrity status (clean or violation type),
+    \item guidance (intent),
+    \item content (raw text).
+\end{itemize}
+This file (\texttt{preprocessed\_\textless doc\_id\textgreater.json}) is the contract between deterministic preprocessing and downstream auditing and is the only required input for Pass~1 and Pass~2.
+
+\subsubsection{Batch execution}
+The module includes batch execution support to generate preprocessed inputs for all documents for which baseline and cosine artifacts exist, enabling crawler-style processing across many SWEs.
+
+\subsection{Pass 1 implementation: integrity and semantic adequacy audit}
+Pass~1 corresponds to Section~5.4.5 and performs section-local auditing. It consumes \texttt{preprocessed\_\textless doc\_id\textgreater.json} and produces a structured audit report designed to be auditable and machine-readable.
+
+\subsubsection{Bounded input packaging and context control}
+The input to Pass~1 is restricted to the aligned sections and headings provided in the preprocessed representation. For each heading, the payload includes: (i) guidance text describing the intent of the section/heading, (ii) deterministic and similarity-derived integrity signals, and (iii) the actual heading content. To keep behavior consistent across documents of different size, a deterministic content budget is applied per heading (e.g., truncation to a fixed character or token limit). The truncation strategy preserves the beginning of content blocks and retains short structured lines (lists, interface enumerations) where possible, since these frequently contain evidence relevant for auditing.
+
+\subsubsection{Prompt management as a versioned artifact}
+Pass~1 instructions are maintained as a versioned prompt file (e.g., \texttt{prompts/pass1\_system.txt}). Treating prompts as versioned artifacts is essential for reproducibility and evaluation: changes to the prompt can systematically change outputs. The prompt enforces the following constraints:
+\begin{itemize}
+    \item report only findings that are supported by evidence in the provided content,
+    \item distinguish integrity issues (e.g., stubs, placeholders) from semantic issues (guidance mismatch),
+    \item do not rewrite or generate content; only audit what exists,
+    \item keep evidence snippets short and directly grounded.
+\end{itemize}
+
+\subsubsection{Schema-constrained output and validation}
+Pass~1 uses schema-constrained output to enforce machine-readability and prevent uncontrolled prose. Outputs must conform to a JSON schema (e.g., \texttt{schemas/pass1\_schema.json}) validated at runtime. Schema enforcement prevents failure modes such as missing required keys, vague findings without evidence, and inconsistent field naming across runs. If schema validation fails, the run is handled via bounded retry logic; persistent failures are recorded as run errors rather than producing partial outputs.
+
+\subsubsection{Scoring model and section-level rationale}
+Each arc42 section receives an ordinal score (0--5) that summarizes the severity and density of detected issues and supports prioritization (Section~5.5). The scoring is accompanied by a short rationale to keep the score reviewable. The rubric is applied consistently:
+\begin{itemize}
+    \item 0: section missing when required,
+    \item 1: mostly placeholders/stubs or template remnants; no meaningful content,
+    \item 2: multiple serious integrity issues and/or strong guidance mismatch,
+    \item 3: partially adequate; mixed quality; incomplete but meaningful core content exists,
+    \item 4: minor gaps; mostly adequate,
+    \item 5: adequate relative to guidance; no issues detected.
+\end{itemize}
+
+\subsubsection{Pass 1 output artifact}
+Pass~1 produces \texttt{pass1\_audit\_\textless doc\_id\textgreater.json} containing per-section entries with a score, integrity findings (heading-level issue objects with evidence), semantic findings (heading-level issue objects with evidence), a list of affected headings, a primary evidence snippet per section, and the score rationale. This structure supports aggregation across many SWEs while remaining auditable for manual verification.
+
+\subsection{Pass 2 implementation: cross-view consistency audit}
+Pass~2 corresponds to Section~5.4.6 and focuses on cross-view coherence. Unlike Pass~1 (section-local), Pass~2 reconstructs intra-document traceability by extracting architectural entities and verifying their coherent use across arc42 views.
+
+\subsubsection{Inputs and reuse of preprocessing}
+Pass~2 consumes the same preprocessed representation as Pass~1. Optionally, Pass~2 can reuse extracted entities or section adequacy signals from Pass~1 outputs, but its core operation remains grounded in the preprocessed content to avoid dependency on non-deterministic intermediate decisions.
+
+\subsubsection{Entity extraction strategy}
+Entities are extracted and normalized into typed sets, for example:
+\begin{itemize}
+    \item \textbf{Units/building blocks} (e.g., unit markers, BBV lists, component identifiers),
+    \item \textbf{Interfaces} (e.g., HTTP, AIDL, HAL, sockets, APIs),
+    \item \textbf{External systems} (e.g., external services, hardware, OS-level actors),
+    \item \textbf{Stakeholders} (if present),
+    \item optionally: quality goals and decision statements (if present).
+\end{itemize}
+
+Extraction is implemented in two layers. First, deterministic cues are applied (section-based mining, bullet list extraction, identifier heuristics). Second, when deterministic cues are insufficient, constrained semantic extraction is used to produce structured entity lists from the provided text. Entities are normalized (trim, de-duplicate, safe case normalization) to reduce false mismatches.
+
+\subsubsection{Consistency rules}
+Pass~2 implements conservative rule checks that only report inconsistencies when explicit textual evidence exists:
+\begin{itemize}
+    \item \textbf{Static vs.\ dynamic alignment (BBV vs.\ Runtime).} Entities referenced in runtime scenarios should be defined as building blocks/units in the building block view.
+    \item \textbf{Infrastructure mapping (BBV vs.\ Deployment).} Deployment content should account for key building blocks and their mapping to infrastructure elements/environments, where applicable.
+    \item \textbf{Goal alignment (Quality goals vs.\ Design decisions).} If quality goals are documented, decisions should not contradict them and should reference relevant drivers where possible.
+    \item \textbf{Risk consistency (Decisions vs.\ Risks/technical debt).} If decisions explicitly document negative consequences or trade-offs, the risks/technical debt section should reflect these concerns.
+\end{itemize}
+
+The output remains intentionally conservative: when a relationship cannot be verified from text, it is not reported as an inconsistency.
+
+\subsubsection{Pass 2 output artifact}
+Pass~2 produces \texttt{pass2\_consistency\_\textless doc\_id\textgreater.json} containing (i) typed entity sets (\texttt{entities\_seen}) and (ii) a list of evidence-backed consistency issues. Optional rule-level counters can be included to support evaluation and quantitative comparisons across runs.
+
+\subsection{Integration and execution in the industrial workflow}
+Stages~1--3 (baseline, cosine, preprocessing) are designed to integrate naturally with the current crawler-based workflow (Section~4). They operate on parsed AsciiDoc documents already handled by existing tooling and produce machine-readable JSON outputs suitable for aggregation per SWE. The staged design supports incremental adoption: deterministic stages provide immediate value even before audit passes are enabled.
+
+A natural integration extension is to run the pipeline earlier (e.g., as a documentation quality gate before merging or uploading). The staged design supports this by enabling strict enforcement for deterministic checks while configuring audit passes in reporting-only mode initially to reduce organizational burden.
+
+\subsection{Configuration and thresholds}
+The pipeline uses explicit thresholds and policies to control sensitivity and reduce false positives. Key parameters are intentionally conservative, reflecting the industrial constraints identified in Section~4.
+
+\paragraph{Deterministic integrity threshold (Stage~1).}
+A heading is considered effectively empty when cleaned content length falls below a minimal threshold after stripping syntax and placeholder patterns. Artifact flags (tables/diagrams) override emptiness and are treated as non-empty.
+
+\paragraph{Cosine similarity thresholds (Stage~2).}
+The similarity layer uses thresholds for (i) section rescue mapping, (ii) placeholder detection, (iii) template guidance copy detection, and (iv) duplicate prose detection. Duplicate detection is restricted to sufficiently long prose blocks to prevent spurious matches on short text.
+
+\paragraph{Section-specific policy (legal note).}
+For sections where template reuse is intended (e.g., legal note), a low similarity triggers a warning indicating that expected license text may have been modified.
+
+These values are evaluated in Section~7 through stage contribution analysis and qualitative inspection of false positives.
+
+\subsection{Reproducibility, logging, and run metadata}
+Reproducibility is treated as a first-class implementation goal because the evaluation compares stages and audit outputs across documents.
+
+\subsubsection{Intermediate artifacts and traceability}
+For each input document, the pipeline persists intermediate outputs: baseline report, cosine report, preprocessed audit package, and the audit outputs of Pass~1 and Pass~2. Persisting intermediate artifacts enables (i) debugging, (ii) stage contribution measurement, and (iii) auditability of results by allowing reviewers to trace any finding back to a specific content snippet and upstream preprocessing decision.
+
+\subsubsection{Logging and failure handling}
+Each stage logs processed documents, generated outputs, counts of detected gaps/violations, and warnings when expected artifacts are missing (e.g., missing cosine output causes preprocessing to skip that document). Batch execution uses bounded exception handling to prevent a single bad document from stopping organization-scale processing.
+
+\subsubsection{Run metadata}
+To ensure comparability across experiments, each output artifact includes a \texttt{run\_metadata} block capturing configuration identifiers (threshold set), prompt and schema versions, and run identifiers. This supports evaluation questions such as whether prompt changes alter findings, whether threshold tuning changes false positives, and whether results remain comparable across runs.
+
+\subsection{Implementation summary}
+The implementation realizes the staged validation methodology as a modular and reproducible toolchain. Deterministic stages establish template-based structural compliance and a stable normalized representation, similarity-based alignment improves robustness to real-world naming variance, and the audit passes operate on guidance-aware inputs with schema-constrained, evidence-backed outputs. Intermediate artifacts are persisted to enable debugging and stage contribution analysis, and configuration/prompt/schema versioning supports controlled experimentation and industrial integration.

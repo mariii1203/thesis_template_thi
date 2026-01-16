@@ -1,0 +1,86 @@
+\section{Introduction}
+Software architecture documentation plays a central role in communicating design intent across stakeholders and throughout system evolution. International guidance on architecture description emphasizes that architectural documentation should address stakeholder concerns through multiple views and viewpoints, rather than relying on a single representation \cite{iso42010}. In industrial practice, architecture documentation often serves as the primary artifact for communicating architectural decisions, constraints, interfaces, and system decomposition across teams and organizational boundaries.
+
+However, architecture documentation quality is difficult to maintain over time. Empirical studies report that architectural inconsistencies evolve during system evolution and that architecture descriptions are not always trusted or used to the extent intended, which undermines their value as engineering artifacts \cite{wohlrab_inconsistencies}. This challenge is compounded by documentation-related debt: incomplete, outdated, or low-quality documentation accumulates under time pressure and organizational constraints, reducing maintainability and increasing coordination cost \cite{documentation_debt}.
+
+This thesis addresses these challenges by designing and implementing an AI-based validation pipeline for architecture documentation, focusing on structural and semantic validation against an arc42-derived reference template used in an industrial environment.
+
+\subsection{Motivation}
+Many organizations standardize architecture documentation via templates to improve consistency and reduce ambiguity. arc42 is a widely used template that structures architecture documentation into a set of sections representing complementary views (e.g., building block view, runtime view, deployment view) and provides guidance for what each section should contain \cite{arc42}. Such structure supports engineering review and enables reviewers to locate architectural information efficiently.
+
+Despite this, real-world documentation frequently deviates from templates due to renamed headings, partial adoption of sections, copied template guidance, or incomplete placeholders (e.g., ``TODO'' markers and unfilled slots). These deviations lead to two practical problems: (i) manual reviews do not scale across many documents and teams, and (ii) purely structural checklist validation is insufficient because it cannot assess whether the content is meaningful or consistent across views. At the same time, fully unconstrained semantic analysis is difficult to operationalize because outputs must remain verifiable and auditable for industrial acceptance.
+
+The motivation of this work is therefore to provide an approach that detects documentation quality issues systematically while producing actionable, evidence-backed findings that can be integrated into existing workflows.
+
+\subsection{Problem Statement}
+The industrial context of this thesis maintains architecture documentation in AsciiDoc and uses an arc42-derived company template as a normative baseline. Documentation is processed at scale (e.g., per software unit) through automated tooling that converts documents into PDFs and produces aggregated statistics. However, comprehensive validation is limited in scope and significant portions of documentation quality assurance still rely on manual review or implicit trust.
+
+The core problem addressed in this thesis is:
+
+\begin{quote}
+How can architecture documentation be validated automatically for both structural compliance and semantic adequacy, while remaining robust to real-world variation and producing auditable results suitable for industrial review?
+\end{quote}
+
+This problem includes three key challenges:
+\begin{enumerate}
+    \item \textbf{Structural variation in practice:} Headings and section names may differ from the template (e.g., renames, merged/split sections), which can cause strict structural checks to over-report missing content.
+    \item \textbf{False completeness:} Template remnants and placeholders can produce a structurally complete document that is not genuinely filled with architectural information.
+    \item \textbf{Cross-view coherence:} Architecture documentation is multi-view by design; inconsistencies across views (e.g., runtime scenarios referencing undefined building blocks) reduce trust and usefulness \cite{iso42010,arc42}.
+\end{enumerate}
+
+\subsection{Objectives and Research Questions}
+To address the problem, this thesis develops a staged validation approach that operationalizes documentation quality into checkable dimensions and produces structured outputs.
+
+\textbf{Objective O1 --- Structural validation:} Validate completeness and structural conformity against the company’s arc42-derived reference template, including missing and extra sections and heading hierarchy.
+
+\textbf{Objective O2 --- Integrity validation:} Detect incomplete or misleading content (stubs, placeholders, copied template instructions) that undermines the usefulness of documentation.
+
+\textbf{Objective O3 --- Semantic validation:} Assess whether section content fulfills the intent expressed by the template guidance (e.g., whether the runtime view describes scenarios and interactions).
+
+\textbf{Objective O4 --- Cross-view consistency validation:} Detect inconsistencies across views by extracting architectural entities and checking their coherent usage across building block, runtime, deployment, decisions, goals, and risks.
+
+These objectives are captured in the following research questions:
+\begin{itemize}
+    \item \textbf{RQ1 (Structural):} How effectively can a deterministic baseline checker validate arc42-derived structure and detect missing/extra headings in real industrial documents?
+    \item \textbf{RQ2 (Robustness):} How can similarity-based alignment reduce false ``missing section'' findings caused by heading renames and variations?
+    \item \textbf{RQ3 (Semantic \& Integrity):} To what extent can an LLM-based audit, constrained to evidence-backed outputs, detect stubs and assess semantic adequacy relative to arc42 guidance?
+    \item \textbf{RQ4 (Consistency):} How can cross-view consistency checks be operationalized on text-centric arc42 documentation without assuming formal architecture models?
+\end{itemize}
+
+\subsection{Approach Overview}
+This thesis proposes a staged pipeline that combines deterministic validation, similarity-based alignment, and constrained semantic auditing:
+\begin{enumerate}
+    \item \textbf{Parsing and normalization:} Convert AsciiDoc documents into a normalized JSON representation of sections, headings, and content blocks.
+    \item \textbf{Baseline structural validation:} Deterministically compare document structure against the reference template to identify missing and extra elements.
+    \item \textbf{Similarity-based resolver:} Apply TF-IDF and cosine similarity to propose correspondences between template headings and document headings when naming variation exists.
+    \item \textbf{Preprocessing layer:} Build an audit-ready representation by aligning sections/headings and attaching template guidance for each section to the corresponding content.
+    \item \textbf{Pass 1 audit (integrity + semantic adequacy):} Evaluate whether headings contain real content (integrity) and whether content satisfies guidance intent (semantic adequacy), producing evidence-backed findings.
+    \item \textbf{Pass 2 audit (cross-view consistency):} Extract architectural entities and detect inconsistencies across views (e.g., runtime scenarios referencing undefined building blocks or missing deployment mappings).
+\end{enumerate}
+
+The design is grounded in the multi-view nature of architecture description and the intent of arc42 sections: the building block view provides static decomposition, the runtime view describes behavioral scenarios, and the deployment view documents infrastructure and mapping \cite{arc42}.
+
+\subsection{Contributions}
+This thesis makes the following contributions:
+\begin{enumerate}
+    \item A documentation quality model tailored to arc42-based validation that operationalizes documentation quality into structural completeness, integrity, semantic adequacy, and cross-view consistency.
+    \item A deterministic baseline checker that validates arc42-derived structure and provides explainable outputs for missing/extra sections and heading hierarchy deviations.
+    \item A similarity-based alignment layer that rescues template-to-document matches under heading/name variation without treating similarity as a proxy for quality.
+    \item A guidance-aware preprocessing representation that couples each section with its expected intent to support auditable semantic validation.
+    \item A constrained semantic auditing design (Pass 1) and a consistency auditing design (Pass 2) producing evidence-backed, structured JSON outputs for downstream aggregation and review.
+\end{enumerate}
+
+Together, these contributions target an industrially relevant gap: comprehensive, auditable validation of text-centric arc42 documentation that goes beyond section presence checks and supports scalable review.
+
+\subsection{Thesis Structure}
+The remainder of this thesis is organized as follows:
+\begin{itemize}
+    \item \textbf{Section 2 (Background):} Introduces software architecture documentation fundamentals, arc42 as the documentation framework, and documentation quality dimensions used throughout the thesis.
+    \item \textbf{Section 3 (Literature Analysis):} Reviews existing approaches for structural validation, similarity/IR-based alignment, ML/anomaly detection, and LLM-based semantic analysis, and derives the research gap and positioning of this work.
+    \item \textbf{Section 4 (Industrial Context \& Requirements):} Describes the industrial workflow and constraints and derives functional and non-functional requirements for the toolchain.
+    \item \textbf{Section 5 (Methodology):} Presents the staged validation methodology, including pipeline design, quality model operationalization, and evaluation plan.
+    \item \textbf{Section 6 (Implementation):} Details the implementation of parsing, baseline checks, similarity resolver, preprocessing, and the two-pass audit architecture, including reproducibility measures.
+    \item \textbf{Section 7 (Evaluation):} Evaluates the pipeline on real industrial documents, compares the contribution of stages, and reports quantitative and qualitative findings.
+    \item \textbf{Section 8 (Discussion):} Discusses strengths, limitations, industrial applicability, and threats to validity.
+    \item \textbf{Section 9 (Conclusion \& Future Work):} Summarizes contributions, answers the research questions, and outlines future extensions.
+\end{itemize}

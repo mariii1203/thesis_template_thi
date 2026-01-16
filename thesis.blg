@@ -1,0 +1,86 @@
+This is BibTeX, Version 0.99d
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: thesis.aux
+Reallocating 'name_of_file' (item size: 1) to 14 items.
+A level-1 auxiliary file: titlepage.aux
+Reallocating 'name_of_file' (item size: 1) to 14 items.
+A level-1 auxiliary file: affidavit.aux
+Reallocating 'name_of_file' (item size: 1) to 20 items.
+A level-1 auxiliary file: acknowledgments.aux
+Reallocating 'name_of_file' (item size: 1) to 15 items.
+A level-1 auxiliary file: abstractEN.aux
+Reallocating 'name_of_file' (item size: 1) to 26 items.
+A level-1 auxiliary file: confidentialityClause.aux
+Reallocating 'name_of_file' (item size: 1) to 17 items.
+A level-1 auxiliary file: nomenclature.aux
+Reallocating 'name_of_file' (item size: 1) to 13 items.
+A level-1 auxiliary file: glossary.aux
+Reallocating 'name_of_file' (item size: 1) to 13 items.
+A level-1 auxiliary file: mainpart.aux
+Reallocating 'name_of_file' (item size: 1) to 9 items.
+The style file: plainnat.bst
+Reallocating 'name_of_file' (item size: 1) to 11 items.
+Database file #1: literature.bib
+Warning--I didn't find a database entry for "iso42010"
+Warning--I didn't find a database entry for "wohlrab_inconsistencies"
+Warning--I didn't find a database entry for "documentation_debt"
+Warning--I didn't find a database entry for "arc42"
+Warning--I didn't find a database entry for "iso_architecture_ads"
+Warning--I didn't find a database entry for "kruchten_4plus1"
+Warning--I didn't find a database entry for "naab_sad_survey"
+Warning--I didn't find a database entry for "mendes_doc_td"
+Warning--I didn't find a database entry for "arc42_overview"
+Warning--I didn't find a database entry for "arc42_template"
+Warning--I didn't find a database entry for "wohlrab_icsa19_guidelines"
+Warning--I didn't find a database entry for "ardoco_icsa23_inconsistency_detection"
+Warning--I didn't find a database entry for "borg_traceability_mapping"
+Warning--I didn't find a database entry for "cleland_huang_lsi_traceability"
+Warning--I didn't find a database entry for "recent_traceability_recovery"
+Warning--I didn't find a database entry for "one_class_svm"
+Warning--I didn't find a database entry for "se_anomaly_detection_survey"
+Warning--I didn't find a database entry for "llm4se_slr"
+Warning--I didn't find a database entry for "llm4se_survey"
+Warning--I didn't find a database entry for "llm_requirements_engineering"
+Warning--I didn't find a database entry for "ardoco_icsa23"
+You've used 0 entries,
+            2773 wiz_defined-function locations,
+            621 strings with 5352 characters,
+and the built_in function-call counts, 33 in all, are:
+= -- 0
+> -- 0
+< -- 0
++ -- 0
+- -- 0
+* -- 2
+:= -- 10
+add.period$ -- 0
+call.type$ -- 0
+change.case$ -- 0
+chr.to.int$ -- 0
+cite$ -- 0
+duplicate$ -- 0
+empty$ -- 1
+format.name$ -- 0
+if$ -- 1
+int.to.chr$ -- 1
+int.to.str$ -- 1
+missing$ -- 0
+newline$ -- 8
+num.names$ -- 0
+pop$ -- 0
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 1
+stack$ -- 0
+substring$ -- 0
+swap$ -- 0
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 0
+while$ -- 0
+width$ -- 0
+write$ -- 7
+(There were 21 warnings)

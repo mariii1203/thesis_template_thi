@@ -1,0 +1,136 @@
+\section{Literature Analysis}
+
+\subsection{Structural validation approaches for architecture documentation}
+A large body of industrial practice addresses documentation quality through template-based standardization. arc42 is one prominent example: it defines a fixed structure and provides guidance for what each section should contain, aiming to make architecture knowledge findable and reviewable \cite{arc42_template}. In parallel, architecture description standards emphasize that documentation should be organized around stakeholders and concerns, typically realized via multiple views and viewpoints \cite{iso42010}. These foundations motivate structural validation as an initial quality gate: if required views or sections are missing, the documentation cannot satisfy its intended communication purpose.
+
+Deterministic structural validation typically checks:
+\begin{itemize}
+    \item presence or absence of required sections and mandatory headings,
+    \item hierarchy validity (e.g., section--subsection nesting),
+    \item completeness indicators (e.g., empty sections; missing tables/diagrams where expected),
+    \item conformance to organization-specific rules (e.g., mandatory content for compliance).
+\end{itemize}
+
+The strength of this approach is reproducibility and explainability: findings can be traced directly to missing or extra elements. Its limitation is that structural conformance can be misleading: documents may include the right headings but contain placeholders, copied template guidance, or \texttt{TODO} markers, creating \emph{false completeness}.
+
+Research on architecture documentation quality and consistency supports why structural checks alone are insufficient. Surveys on architectural inconsistencies report that architecture descriptions are not always trusted or used as intended, and that keeping documentation consistent over time is challenging \cite{wohlrab_icsa19_guidelines}. This aligns with the industrial constraint that comprehensive manual review does not scale, while overly strict automated checks can create resistance if they generate many false positives.
+
+\paragraph{Implication for this thesis.}
+Structural validation is necessary as a baseline (high precision, explainable), but must be complemented by integrity and semantic checks that detect ``structure without substance.''
+
+\subsection{Similarity and IR-based approaches (alignment, traceability, and reuse detection)}
+When documentation headings diverge from a template (renames, merged sections, variant terminology), strict structural matchers can over-report missing content. A common way to handle this is to apply Information Retrieval (IR) techniques to find likely correspondences between artifacts (e.g., section titles, headings, paragraphs), treating the problem as a ranking and matching task.
+
+IR-based traceability and alignment has a long history in software engineering. Systematic mappings of IR-based trace recovery show that many approaches rely on algebraic IR models (e.g., TF-IDF, LSI) and similarity measures to propose candidate links, often emphasizing that evaluation and strength-of-evidence varies widely across studies \cite{borg_traceability_mapping,cleland_huang_lsi_traceability}. These approaches are attractive in industrial settings because they:
+\begin{itemize}
+    \item require no labeled training data,
+    \item can be incremental and configurable,
+    \item provide explainable similarity scores for candidate correspondences.
+\end{itemize}
+
+Classic work on traceability recovery demonstrates the feasibility of using IR (e.g., LSI) to recover links between artifacts and highlights the need for incremental and maintainable approaches \cite{cleland_huang_lsi_traceability}. More recent work continues to treat IR as a practical baseline for recovering links between natural language artifacts and technical artifacts, emphasizing feasibility and usefulness \cite{recent_traceability_recovery}.
+
+For architecture documentation validation, these ideas translate into two practical uses:
+\begin{enumerate}
+    \item \textbf{Heading/section alignment (template $\leftrightarrow$ document):} TF-IDF and cosine similarity can propose that headings such as ``System Context'' and ``Scope and Context'' likely correspond, reducing false missing-section signals without requiring exact naming matches.
+    \item \textbf{Boilerplate/template-remnant detection:} Very high similarity between document content and template guidance can indicate copy-paste of instructions instead of authored architecture content.
+\end{enumerate}
+
+However, IR similarity is not equivalent to semantic adequacy. IR-based approaches can propose candidate correspondences, but they do not reliably decide whether content actually fulfills architectural intent—especially for sections such as runtime scenarios, deployment mapping, or design rationale.
+
+\paragraph{Implication for this thesis.}
+IR methods are well-supported as alignment and candidate-generation tools, which justifies using TF-IDF/cosine to rescue renamed headings and to flag near-verbatim template reuse, while leaving semantic adequacy to a later stage.
+
+\subsection{Machine learning and anomaly-detection approaches (and why they are risky here)}
+A natural idea for large-scale quality checks is to treat ``bad documentation'' as an anomaly and use machine learning to detect it. In anomaly detection, one-class classification techniques model ``normal'' data and flag deviations; these methods have mature ML foundations \cite{one_class_svm}. In software engineering, anomaly detection is most commonly applied to runtime signals (logs, performance telemetry, failures), where the data is high-volume and the concept of deviation can be statistically defined \cite{se_anomaly_detection_survey}.
+
+This differs from architecture documentation, where:
+\begin{itemize}
+    \item the data is sparse and heterogeneous (prose, lists, tables, diagrams),
+    \item ``normal'' varies substantially across teams and projects,
+    \item ground truth labels for non-compliance are expensive and subjective,
+    \item interpretability is critical for adoption (engineers need actionable reasons, not only a score).
+\end{itemize}
+
+Even when ML models can detect deviations, they often provide weaker explanations than rule-based missing-structure findings or evidence-backed semantic audits. This aligns with the practical risk observed in exploratory phases: a classifier may learn superficial document traits rather than normative compliance criteria.
+
+\paragraph{Implication for this thesis.}
+ML/anomaly-detection approaches are theoretically relevant, but they introduce high implementation and validation risk in this context (data needs, explainability, variability). This supports a staged design where deterministic checks and IR alignment provide stable coverage first, and semantic reasoning is constrained to produce evidence-backed findings.
+
+\subsection{AI and LLMs in software engineering and documentation analysis}
+Large Language Models (LLMs) have rapidly become prominent in software engineering research and practice, with systematic studies cataloging applications, benefits, and limitations across SE tasks \cite{llm4se_slr,llm4se_survey}. These studies emphasize typical strategies (prompting, data curation, evaluation) as well as common risks (hallucination, reliability concerns, sensitivity to prompts).
+
+For documentation-centric tasks (including requirements and traceability), the literature increasingly explores LLMs for:
+\begin{itemize}
+    \item extraction and classification,
+    \item semantic comparison and validation,
+    \item traceability link recovery (often enhanced via retrieval).
+\end{itemize}
+
+In requirements engineering, recent work highlights that LLMs can support elicitation and validation but must be integrated carefully to address trustworthiness and correctness concerns, often advocating structured processes and safeguards rather than unconstrained generation \cite{llm_requirements_engineering}.
+
+In architecture documentation, a relevant line of work focuses on consistency between natural-language architecture documents and architecture models. The ArDoCo project proposes detecting inconsistencies by establishing traceability between natural-language architecture documentation and architecture models, flagging unmentioned and missing model elements \cite{ardoco_icsa23_inconsistency_detection}. This is powerful when formal models exist, but many industrial settings rely on text-centric documentation without corresponding formal models. In such cases, the opportunity shifts toward intra-document consistency checks across arc42 views (building blocks $\leftrightarrow$ runtime $\leftrightarrow$ deployment $\leftrightarrow$ decisions/risks), using entity extraction and evidence-based reasoning.
+
+\paragraph{Implication for this thesis.}
+LLMs are well-motivated for semantic adequacy and consistency auditing, but the literature strongly suggests integrating them with constrained outputs (schemas), grounding/evidence requirements, and hybrid pipelines that retain deterministic and IR-based stages for stability \cite{llm4se_slr,ardoco_icsa23_inconsistency_detection}. This supports the design choice in this thesis: stabilize structure and alignment via deterministic and IR stages, then apply LLMs in a bounded auditor role that reports only evidence-backed findings.
+
+\paragraph{Transition to research gap.}
+The reviewed approaches each address only parts of the documentation quality dimensions defined in Section~2.3. Structural validators provide deterministic coverage but cannot assess semantic adequacy. IR/similarity methods improve robustness to naming variation and can flag near-verbatim template reuse, but they do not establish that content fulfills architectural intent. ML/anomaly detection may detect statistical deviations, yet it lacks a normative baseline and typically provides insufficient audit-grade explanations. LLMs enable semantic interpretation, but require strict constraints and evidence grounding to be usable in industrial validation workflows. These limitations motivate the integrated, staged validation pipeline proposed in this thesis, formalized in the research gap (Section~3.5) and positioning (Section~3.6).
+\subsection{Research Gap}
+Section~2.3 defined architecture documentation quality in this thesis along four operational dimensions: structural completeness, content integrity, semantic adequacy to section intent, and cross-view consistency. When mapped to existing research and industrial practice, a clear pattern emerges: most approaches address only a subset of these dimensions and often rely on assumptions that do not hold in text-centric industrial documentation settings.
+
+\paragraph{Structural validation is necessary but shallow.}
+Template-based frameworks such as arc42 provide a normative structure and guidance for what should be documented and where (Section~2.2). This enables deterministic validation of structural completeness (presence of required sections and expected hierarchy). However, structural conformance alone is insufficient: a section can exist while containing placeholders, residual template instructions, or generic text, creating \emph{false completeness}. This limitation is consistent with empirical observations that architecture descriptions may exist yet lose practical value as they diverge from evolving systems and stakeholder needs \cite{wohlrab_icsa19_guidelines}.
+
+\paragraph{Documentation debt and evolving inconsistencies motivate validation beyond presence checks.}
+Empirical work reports that architectural inconsistencies evolve over time and that architecture descriptions are not always trusted or used to the extent intended \cite{wohlrab_icsa19_guidelines}. In parallel, research on documentation technical debt characterizes recurring documentation deficiencies (e.g., non-existent, inadequate, or incomplete documentation) and their persistence under organizational constraints \cite{mendes_doc_td}. Together, these findings motivate validation that targets integrity (``is it genuinely authored and informative?'') rather than only structural presence.
+
+\paragraph{Consistency and traceability research often assumes formal models that are unavailable in many contexts.}
+Several architecture-consistency approaches detect mismatches by recovering links between informal text and formal architecture representations. ArDoCo, for instance, detects inconsistencies between natural-language software architecture documentation and architecture models via traceability link recovery and identifies unmentioned model elements and missing model elements \cite{ardoco_icsa23}. While this validates the general principle that inconsistency detection via recovered relationships is feasible and valuable, it typically presupposes the existence of formal models and a supporting tooling ecosystem. Many organizations, however, maintain primarily text-centric arc42(-derived) documentation without corresponding formal architecture models, which limits direct applicability of model-based approaches.
+
+\paragraph{Similarity/IR techniques help alignment but do not establish semantic correctness.}
+Information retrieval methods (e.g., TF-IDF/cosine similarity) are widely used to propose candidate correspondences between textual artifacts (e.g., for traceability link recovery). For arc42 documentation, such techniques can compensate for naming variation (e.g., renamed headings) and can also flag near-verbatim reuse of template guidance. However, lexical similarity is not equivalent to semantic adequacy: IR methods can propose candidates but cannot reliably assess whether section content fulfills its architectural intent, especially for behavioral and rationale-centric sections.
+
+\paragraph{LLMs provide semantic capability but raise reliability and auditability concerns.}
+Recent surveys of LLMs in software engineering document broad applicability but also emphasize recurring risks such as hallucination, sensitivity to prompts, and the need for careful evaluation and constraints \cite{llm4se_slr}. For documentation auditing, the challenge is therefore not only whether LLMs can interpret content, but how to constrain them to produce reliable, verifiable, and audit-grade findings suitable for industrial review.
+
+\paragraph{Research gap.}
+Taken together, the literature motivates a gap that directly matches the industrial problem addressed by this thesis:
+
+\begin{quote}
+There is a lack of an integrated, audit-oriented validation approach that operates on text-only arc42 (or arc42-derived) architecture documentation, combines deterministic structural guarantees with robustness to naming variance, performs integrity and semantic adequacy checks grounded in section intent, and validates cross-view consistency through explicitly reported, evidence-backed findings.
+\end{quote}
+
+This gap is particularly relevant in industrial environments where architecture documentation exists primarily in textual form and must be reviewed under time constraints, making explainability and actionable outputs essential.
+
+\subsection{Positioning of This Work}
+This thesis positions its contribution as an engineering synthesis of complementary techniques—deterministic structural validation, similarity-based alignment, and constrained LLM-based semantic auditing—to address the four quality dimensions defined in Section~2.3 within the constraints of text-centric, arc42-derived documentation.
+
+\paragraph{Normative backbone: arc42(-derived) reference template.}
+arc42 provides a structured, multi-view documentation model with explicit section intent and guidance (Section~2.2), enabling a normative definition of what \emph{should} be documented and where. In this thesis, validation is performed against the company-specific arc42-derived reference template used in the case-study environment, while arc42 remains the conceptual foundation. This grounds validation criteria in an established documentation framework rather than subjective judgments.
+
+\paragraph{Pipeline design: from deterministic guarantees to constrained semantics.}
+The approach is implemented as a staged pipeline in which each stage contributes distinct capabilities and controls specific failure modes:
+
+\begin{enumerate}
+    \item \textbf{Baseline structural validation (deterministic).}
+    Validates structural completeness by checking required sections/headings and hierarchy against the reference template. This stage provides a stable and reproducible contract check that does not depend on probabilistic inference.
+
+    \item \textbf{Similarity-based resolver (robust alignment).}
+    Uses IR-style similarity to rescue matches when headings deviate from the template (e.g., renames), improving robustness without claiming semantic correctness. Similarity is used as a controlled alignment mechanism rather than a proxy for documentation quality.
+
+    \item \textbf{Preprocessing and normalization (audit-ready representation).}
+    Produces a normalized representation that couples each section with its guidance intent, enabling controlled downstream reasoning. This directly supports auditable semantic validation by constraining what is assessed (section content) against what is expected (template guidance).
+
+    \item \textbf{Pass~1 LLM audit: integrity and semantic adequacy (bounded).}
+    Applies an LLM to detect stubs/placeholders and evaluate whether content fulfills the intent implied by the section guidance. The motivation is grounded in empirical observations that architecture documentation degrades over time and loses trust when inconsistencies evolve \cite{wohlrab_icsa19_guidelines}, and in documented persistence of documentation deficiencies as technical debt \cite{mendes_doc_td}. To mitigate reliability concerns, the audit is constrained through structured inputs and evidence-backed, schema-validated outputs \cite{llm4se_slr}.
+
+    \item \textbf{Pass~2 consistency audit: cross-view coherence via intra-document traceability.}
+    Implements cross-view consistency checks across arc42 views by extracting architectural entities and validating their coherent references across sections. The design is inspired by the general principle in architecture consistency research that mismatches can be detected via recovered relationships across representations \cite{ardoco_icsa23}, but it remains applicable to text-only documentation by reconstructing relationships directly from the document.
+\end{enumerate}
+
+\paragraph{Contribution relative to existing work.}
+Compared to purely structural validators, this work extends validation into integrity and semantic adequacy. Compared to IR-only approaches, it uses similarity as a robustness mechanism for alignment and boilerplate detection rather than a substitute for meaning. Compared to model-based consistency frameworks such as ArDoCo, it targets the common industrial scenario of text-only architecture documentation while retaining the core idea of detecting inconsistencies via reconstructable relationships. Finally, compared to unconstrained LLM usage, this work follows recommendations highlighted in LLM4SE surveys by embedding LLM reasoning into a structured, evidence-grounded validation pipeline rather than treating it as an open-ended generator \cite{llm4se_slr}.
+
+\paragraph{Expected impact.}
+By turning architecture documentation validation into a staged, auditable process, the approach aims to increase the detectability and localization of documentation defects (Section~2.3.6). This supports industrial review workflows where trust, traceability of findings, and actionable outputs are critical, and where manual validation alone does not scale.

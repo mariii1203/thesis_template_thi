@@ -1,0 +1,237 @@
+\section{Evaluation}
+\label{sec:evaluation}
+
+This chapter evaluates the proposed staged validation pipeline with respect to the documentation quality dimensions defined in Section~2.3 (structural completeness, integrity, semantic adequacy, and cross-view consistency). The evaluation is designed so that the study setup and the analysis protocol remain valid independently of the final numerical outcomes; quantitative result sections are completed once Pass~1 and Pass~2 are executed on the evaluation corpus.
+
+\subsection{Evaluation objectives}
+\label{sec:eval_objectives}
+
+The evaluation assesses whether the pipeline improves the detection and localization of architecture documentation issues in a way that is auditable and practically useful. Three objectives guide the evaluation:
+
+\begin{enumerate}
+    \item \textbf{Stage contribution:} quantify and explain what each stage adds (baseline $\rightarrow$ cosine resolver $\rightarrow$ preprocessing $\rightarrow$ Pass~1 $\rightarrow$ Pass~2).
+    \item \textbf{Auditability:} verify that outputs remain evidence-backed and actionable, consistent with the auditability constraints in Section~5.4.7.
+    \item \textbf{Industrial relevance:} assess whether detected issues align with reviewer expectations and whether the output format can support real review workflows.
+\end{enumerate}
+
+\subsection{Case study and dataset setup}
+\label{sec:eval_dataset}
+
+\subsubsection{Industrial document corpus}
+\label{sec:eval_corpus}
+
+The evaluation corpus consists of real architecture documentation authored using an arc42-derived company template and maintained in AsciiDoc (\texttt{.adoc}) format. Documents are maintained per software unit/subsystem (e.g., SWE-level documentation) and are processed in batch form, consistent with the workflow described in Chapter~4.
+
+\paragraph{Corpus scope (to fill).}
+\begin{itemize}
+    \item Number of SWE documents: \textbf{[N]}
+    \item Snapshot date / time window: \textbf{[DATE]}
+    \item Document selection criterion: \textbf{[e.g., latest mainline versions]}
+    \item Template version identifier: \textbf{[Template ID / commit hash]}
+\end{itemize}
+
+\subsubsection{Reference template}
+\label{sec:eval_template}
+
+All validation is performed against the company-specific arc42-derived reference template described in Section~2.2. Template guidance is used both as normative expectation for deterministic structure checks and as the reference intent for semantic adequacy checks.
+
+\paragraph{Template source (to fill).}
+\begin{itemize}
+    \item Template artifact: \texttt{expected\_spec.json} (derived from company template AsciiDoc)
+    \item Template revision: \textbf{[commit hash / version tag]}
+\end{itemize}
+
+\subsubsection{Preprocessing and input normalization}
+\label{sec:eval_preprocessing}
+
+Before evaluation, documents are parsed and normalized into the structured JSON representation described in Chapter~6. The representation captures section/heading hierarchy, content blocks, and associated template guidance per section/heading. The evaluation uses persisted intermediate artifacts (baseline reports, cosine reports, and preprocessed inputs) to ensure that stage-by-stage comparisons are reproducible.
+
+\subsection{Metrics, criteria, and evaluation protocol}
+\label{sec:eval_metrics}
+
+This section defines the evaluation measures and how results are interpreted.
+
+\subsubsection{Structural metrics (Stage~1 baseline)}
+\label{sec:eval_structural_metrics}
+
+Structural completeness is measured using deterministic signals from the baseline reports:
+\begin{itemize}
+    \item Missing required sections (count per document; list of missing sections)
+    \item Missing required headings (count per section; list of headings)
+    \item Hierarchy mismatches (if enabled; count and types)
+    \item Extra sections/headings (count; treated as deviation/extension signals)
+\end{itemize}
+
+\subsubsection{Robustness metrics (Stage~2 cosine resolver)}
+\label{sec:eval_robustness_metrics}
+
+Robustness to naming variation is measured by:
+\begin{itemize}
+    \item Rescued mappings count: number of template sections aligned to document sections via similarity
+    \item Reduction in missing-section findings after applying rescue mappings (before $\rightarrow$ after)
+    \item Precision sanity checks: sampled manual verification of rescued mappings (sampling strategy in Section~\ref{sec:eval_qualitative})
+\end{itemize}
+
+Additionally, optional indicators from the cosine layer are reported:
+\begin{itemize}
+    \item high-confidence unfilled placeholder headings detected,
+    \item near-verbatim template guidance copies detected,
+    \item duplicate content candidates detected.
+\end{itemize}
+
+\subsubsection{Integrity and semantic adequacy metrics (Pass~1)}
+\label{sec:eval_pass1_metrics}
+
+Pass~1 evaluates integrity and semantic adequacy at section/heading granularity. The following measures are reported:
+\begin{itemize}
+    \item Integrity issue count per document and per section (e.g., placeholders, TODOs, empty headings)
+    \item Semantic mismatch count per document and per section (guidance not satisfied, irrelevant content, boilerplate)
+    \item Evidence coverage rate: percentage of findings that include a valid evidence snippet
+    \item Section score distribution (0--5) across documents and sections
+\end{itemize}
+
+In addition to quantitative counts, a qualitative inspection assesses whether findings are clearly justified and human-verifiable.
+
+\subsubsection{Cross-view consistency metrics (Pass~2)}
+\label{sec:eval_pass2_metrics}
+
+Pass~2 evaluates cross-view consistency through entity extraction and conservative rule checks. Measures include:
+\begin{itemize}
+    \item Entity coverage: counts of extracted entities by type (units/building blocks, interfaces, external systems, stakeholders)
+    \item Consistency issue count by rule category:
+    \begin{itemize}
+        \item Building Block View $\leftrightarrow$ Runtime View (undefined entities referenced in runtime scenarios)
+        \item Building Block View $\leftrightarrow$ Deployment View (missing or unclear mappings)
+        \item Goals $\leftrightarrow$ Decisions (contradictions or missing alignment where checkable)
+        \item Decisions $\leftrightarrow$ Risks/Technical Debt (unreflected trade-offs where explicit evidence exists)
+    \end{itemize}
+    \item Evidence coverage rate for consistency issues
+\end{itemize}
+
+\subsubsection{Stage contribution analysis (primary evaluation lens)}
+\label{sec:eval_stage_contribution}
+
+The primary evaluation method is a stage comparison:
+\begin{enumerate}
+    \item Stage~1 only (baseline)
+    \item Stage~1 + Stage~2 (baseline + cosine resolver)
+    \item Stage~1 + Stage~2 + Stage~3 (preprocessed audit readiness)
+    \item Pass~1 (integrity + semantic adequacy)
+    \item Pass~2 (cross-view consistency)
+\end{enumerate}
+
+For each stage set, the evaluation reports:
+\begin{itemize}
+    \item additional issues found,
+    \item issues resolved or reduced (e.g., fewer false ``missing'' sections after rescue),
+    \item changes in section scores (where applicable),
+    \item representative qualitative examples illustrating the incremental benefit.
+\end{itemize}
+
+\subsection{Results on real documents}
+\label{sec:eval_results}
+
+This section reports quantitative results once the pipeline is executed on the corpus.
+
+\subsubsection{Dataset summary}
+\label{sec:eval_dataset_summary}
+
+\paragraph{To fill after execution.}
+\begin{itemize}
+    \item Documents processed successfully: \textbf{[N\_success]} / \textbf{[N\_total]}
+    \item Failures and reasons: \textbf{[N\_fail + reasons]}
+    \item Runtime per document (median/mean): \textbf{[time]}
+    \item Output artifact sizes (average): \textbf{[avg JSON sizes]}
+\end{itemize}
+
+\subsubsection{Structural baseline results}
+\label{sec:eval_baseline_results}
+
+\paragraph{To fill after execution.}
+\begin{itemize}
+    \item Total missing required sections across corpus: \textbf{[X]}
+    \item Most frequently missing sections: \textbf{[Top 5]}
+    \item Most frequent extra sections: \textbf{[Top 5]}
+\end{itemize}
+
+\subsubsection{Cosine resolver contribution}
+\label{sec:eval_cosine_results}
+
+\paragraph{To fill after execution.}
+\begin{itemize}
+    \item Total rescued mappings: \textbf{[X]}
+    \item Reduction in missing-section count: \textbf{[before $\rightarrow$ after]}
+    \item Representative rescued mappings: \textbf{[examples]}
+\end{itemize}
+
+\subsubsection{Pass~1 results (integrity + semantic adequacy)}
+\label{sec:eval_pass1_results}
+
+\paragraph{To fill after execution.}
+\begin{itemize}
+    \item Total integrity issues detected: \textbf{[X]}
+    \item Total semantic issues detected: \textbf{[X]}
+    \item Section score distribution summary: \textbf{[histogram summary]}
+\end{itemize}
+
+\subsubsection{Pass~2 results (cross-view consistency)}
+\label{sec:eval_pass2_results}
+
+\paragraph{To fill after execution.}
+\begin{itemize}
+    \item Entities extracted totals: \textbf{[counts per type]}
+    \item Consistency issues total: \textbf{[X]}
+    \item Breakdown by rule category: \textbf{[counts]}
+\end{itemize}
+
+\subsection{Comparison of stages}
+\label{sec:eval_stage_comparison}
+
+This section synthesizes stage contribution:
+\begin{itemize}
+    \item what baseline detects and where it over-reports due to naming variation,
+    \item what cosine rescue reduces (false ``missing''), and what it additionally detects (placeholders, template copies),
+    \item what structure+similarity still misses that Pass~1 detects (semantic inadequacy),
+    \item what Pass~1 still misses that Pass~2 detects (cross-view inconsistencies).
+\end{itemize}
+
+\subsection{Qualitative analysis and expert feedback}
+\label{sec:eval_qualitative}
+
+A qualitative inspection complements quantitative metrics by assessing interpretability and industrial usefulness.
+
+\paragraph{Proposed protocol (to execute if feasible).}
+\begin{itemize}
+    \item Sample \textbf{[k]} documents covering low/mid/high scores.
+    \item For each document, inspect the top \textbf{[m]} findings by severity.
+    \item Classify each finding as:
+    \begin{itemize}
+        \item valid and useful,
+        \item valid but low priority,
+        \item false positive / ambiguous,
+        \item unclear evidence.
+    \end{itemize}
+\end{itemize}
+
+If feasible, practitioner feedback from a quality manager or architect is incorporated:
+\begin{itemize}
+    \item perceived usefulness of evidence-backed findings,
+    \item acceptance of the score rubric as a prioritization aid,
+    \item suggestions for threshold tuning and rule adjustment.
+\end{itemize}
+
+\subsection{Threats to evaluation validity}
+\label{sec:eval_threats}
+
+The evaluation is subject to several validity threats (discussed in depth in Chapter~8):
+\begin{itemize}
+    \item \textbf{Construct validity:} proxy metrics (counts/scores) may not fully represent true documentation quality.
+    \item \textbf{Internal validity:} threshold sensitivity and prompt formulation may influence outputs.
+    \item \textbf{External validity:} results may depend on the company template variant and domain-specific writing conventions.
+    \item \textbf{Reliability:} variability in audit passes is mitigated through bounded inputs, schema constraints, and evidence requirements.
+\end{itemize}
+
+\subsection{Summary}
+\label{sec:eval_summary}
+
+This chapter evaluates the pipeline in terms of stage contribution, auditability, and industrial relevance. Results are reported quantitatively (issue counts, score distributions, and rule-category breakdowns) and qualitatively (evidence-backed examples and practitioner feedback). Chapter~8 interprets the results and discusses strengths, limitations, and industrial applicability.

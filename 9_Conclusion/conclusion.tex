@@ -1,0 +1,95 @@
+\section{Conclusion and Future Work}
+\label{sec:conclusion}
+
+\subsection{Summary of the problem and approach}
+\label{sec:conclusion_problem_approach}
+
+This thesis addressed the challenge of validating software architecture documentation quality in industrial settings where documentation is primarily text-centric, evolves over time, and is costly to review manually at scale. Although arc42(-derived) templates provide a normative structure, real-world documents frequently exhibit structural variation (e.g., renamed or reorganized headings), incomplete placeholder content (e.g., unfilled template slots or \texttt{TODO/TBD} markers), and inconsistencies across views. These factors motivate automated validation that goes beyond the mere presence of headings, while remaining explainable and auditable for industrial acceptance.
+
+To address this, the thesis proposed and implemented a staged validation pipeline that combines deterministic structural validation, similarity-based alignment to improve robustness under naming variation, and constrained LLM-based auditing for integrity, semantic adequacy, and cross-view consistency. The approach operationalized documentation quality along four dimensions defined in Section~2.3: \emph{structural completeness}, \emph{integrity}, \emph{semantic adequacy to section intent}, and \emph{cross-view consistency}. Each stage of the pipeline is designed to contribute a specific capability while controlling a specific failure mode, and all audit findings are required to be evidence-backed.
+
+\subsection{Summary of contributions}
+\label{sec:conclusion_contributions}
+
+This work makes the following contributions:
+
+\begin{enumerate}
+    \item \textbf{An operational documentation quality model} for arc42(-derived) documentation, defining measurable dimensions for structural completeness, integrity, semantic adequacy, and cross-view consistency.
+
+    \item \textbf{A deterministic baseline checker} that validates structure and mandatory content presence against a reference template, producing explainable reports suitable for audit and aggregation.
+
+    \item \textbf{A similarity-based resolver} (TF-IDF with cosine similarity) that reduces false ``missing section'' findings caused by heading variation and identifies high-confidence integrity signals such as near-verbatim template reuse and unfilled placeholders.
+
+    \item \textbf{A guidance-aware preprocessing layer} that aligns document and template structure and attaches guidance to each audited section/heading, producing a bounded, audit-ready representation for semantic analysis.
+
+    \item \textbf{A two-pass auditing design}:
+    \begin{itemize}
+        \item \textbf{Pass~1} for integrity and semantic adequacy, producing evidence-backed findings and section-level scores.
+        \item \textbf{Pass~2} for cross-view consistency via entity extraction and intra-document traceability rules across building blocks, runtime scenarios, deployment mappings, goals, decisions, and risks.
+    \end{itemize}
+
+    \item \textbf{Reproducibility- and evaluation-ready engineering packaging}, including versioned prompts and schemas, externalized configuration, persisted intermediate artifacts per stage, and run manifests with hashes for prompt/schema/config/template traceability.
+\end{enumerate}
+
+\subsection{Answer to the research questions}
+\label{sec:conclusion_rq_answers}
+
+This section explicitly answers the research questions (RQ1--RQ4) defined in Chapter~1. Quantitative values and concrete examples are finalized once the evaluation results (Chapter~7) are available.
+
+\paragraph{RQ1 (Structural): How effectively can a deterministic baseline checker validate arc42-derived structure and detect missing/extra headings in real industrial documents?}
+The baseline checker demonstrated that deterministic template validation can reliably identify missing and extra structural elements and report them with high explainability and reproducibility. \textbf{[TO FILL AFTER RESULTS: key structural findings, e.g., most frequently missing sections/headings and corpus-level counts.]}
+
+\paragraph{RQ2 (Robustness): How can similarity-based alignment reduce false ``missing section'' findings caused by heading renames and variations?}
+The similarity-based resolver reduced false ``missing section'' detections introduced by naming variation by proposing transparent, inspectable mappings between template and document headings. This improved alignment of real documents to the normative template structure without using similarity as a quality proxy. \textbf{[TO FILL AFTER RESULTS: before/after reduction and representative rescued mapping examples.]}
+
+\paragraph{RQ3 (Semantic \& Integrity): To what extent can an LLM-based audit, constrained to evidence-backed outputs, detect stubs and assess semantic adequacy relative to arc42 guidance?}
+The constrained Pass~1 audit enabled detection of incomplete content (stubs, placeholders, template remnants) and semantic mismatches where section content does not fulfill the intent expressed by template guidance. Auditability was maintained through schema-constrained outputs and evidence-backed reporting that grounds findings directly in the provided text. \textbf{[TO FILL AFTER RESULTS: dominant finding types, evidence coverage rate, score distribution patterns.]}
+
+\paragraph{RQ4 (Consistency): How can cross-view consistency checks be operationalized on text-centric arc42 documentation without assuming formal architecture models?}
+Pass~2 showed that cross-view consistency can be operationalized on text-only documentation by extracting architectural entities and validating their coherent usage across arc42 views (e.g., Building Block View vs.\ Runtime View vs.\ Deployment View), as well as alignment between goals, decisions, and risks when available. This realizes an intra-document traceability perspective without requiring external formal models. \textbf{[TO FILL AFTER RESULTS: most common inconsistency categories and representative issue types.]}
+
+\subsection{Practical implications}
+\label{sec:conclusion_practical_implications}
+
+From an industrial perspective, the staged pipeline provides a realistic adoption path aligned with organizational constraints:
+
+\begin{itemize}
+    \item \textbf{Low-risk reporting value immediately:} deterministic stages (baseline checks and preprocessing) can be deployed as reporting tools with minimal operational risk, producing structured outputs and aggregated statistics.
+
+    \item \textbf{Gradual introduction of semantic auditing:} LLM-based auditing can be introduced incrementally once trust in evidence-backed outputs is established, beginning in non-blocking mode and later supporting stricter enforcement for high-confidence rules.
+
+    \item \textbf{Scalable review support:} the approach reduces manual effort by directing reviewers to evidence-backed defects and by enabling aggregation across many documents, which is particularly valuable for batch crawler workflows and quality monitoring.
+\end{itemize}
+
+\subsection{Limitations}
+\label{sec:conclusion_limitations}
+
+Key limitations include dependence on the specific reference template variant and its guidance texts, limited coverage of non-textual artifacts (e.g., diagrams/UML) without explicit integration, and residual variability in semantic judgments despite constraints such as schema enforcement and evidence-only reporting. These limitations motivate the future work directions below.
+
+\subsection{Future work}
+\label{sec:conclusion_future_work}
+
+This thesis opens several clear extensions:
+
+\paragraph{FW1 --- Artifact-aware validation (diagrams/UML).}
+Extend validation beyond text to incorporate architecture diagrams and UML artifacts, for example by verifying the presence and completeness of required diagrams, extracting key labels/relationships when feasible, and checking consistency between textual descriptions and diagram content. Such extensions can improve coverage for architecture information that is commonly communicated visually.
+
+\paragraph{FW2 --- Integration with traceability artifacts (e.g., unit mapping).}
+Integrate external mapping files (e.g., \texttt{unitmapping.json}) to strengthen traceability checks such as verifying that all units documented in the Building Block View exist in configuration management artifacts. This would connect documentation validation to governance artifacts and enable stronger industrial compliance rules.
+
+\paragraph{FW3 --- Trend analysis across versions.}
+Extend the pipeline to compare audit outputs across document revisions to detect improvement/regression trends and support continuous quality monitoring. This would enable time-series reporting of documentation quality per unit and per arc42 section.
+
+\paragraph{FW4 --- Dashboard and workflow integration.}
+Provide a lightweight dashboard that aggregates findings across documents and supports drill-down from statistics to evidence snippets, improving usability for quality managers and architects. Integration into existing review workflows can further increase adoption.
+
+\paragraph{FW5 --- Calibration and expert-in-the-loop refinement.}
+Systematically calibrate thresholds, rules, and prompts based on structured reviewer feedback to reduce false positives and improve prioritization. This could include workflows for approving new rules, maintaining rule sets per domain, and establishing acceptance criteria for blocking checks.
+
+\paragraph{FW6 --- Generalization beyond arc42.}
+Generalize the staged validation design to other architecture documentation frameworks by swapping the reference structure and guidance mappings while retaining the same pipeline philosophy (deterministic structure, robust alignment, constrained semantic auditing, evidence-backed reporting).
+
+\subsection{Closing statement}
+\label{sec:conclusion_closing}
+
+This thesis demonstrated that architecture documentation validation can be engineered as a staged pipeline that combines deterministic checks, similarity-based alignment, and constrained semantic auditing. By grounding validation in a normative reference template and enforcing evidence-backed, schema-constrained reporting, the approach supports scalable and auditable quality assurance for architecture documentation in industrial contexts. \textbf{[TO FILL AFTER RESULTS: final one-sentence result claim with concrete outcome wording.]}

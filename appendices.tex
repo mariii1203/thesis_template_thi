@@ -1,0 +1,232 @@
+%----------Anhang/Appendices--------------------------------------------------------------
+
+\appendix
+% =========================================================
+% APPENDICES
+% =========================================================
+
+\section{Appendix A: Repository Layout and Artifact Naming}
+\label{app:repo_layout}
+
+A consistent repository layout is used to separate source code, configuration, prompts/schemas, datasets, and run outputs. This structure supports prompt/schema versioning, deterministic replay of stages, stage-wise evaluation (Section~7), and integration into batch workflows (Section~4).
+
+\subsection{Recommended repository structure}
+\begin{verbatim}
+DocValidator/
+  optimal/
+    baseline_check.py
+    cosine_tfidf_layer.py
+    llm_preprocess.py
+    llm_pass1.py
+    llm_pass2.py
+    pipeline_runner.py
+
+  schemas/
+    pass1_schema.json
+    pass2_schema.json
+    preprocessed_schema.json
+    baseline_report_schema.json
+    cosine_report_schema.json
+
+  prompts/
+    pass1_system.txt
+    pass2_system.txt
+
+  config/
+    thresholds.yaml
+    pipeline.yaml
+    logging.yaml
+
+  data/
+    template/
+      expected_spec.json
+    parsed/
+      <doc_id>.json
+    reports/
+      baseline/      baseline_report_<doc_id>.json
+      cosine/        cosine_resolved_report_<doc_id>.json
+      preprocessed/  preprocessed_<doc_id>.json
+      pass1/         pass1_audit_<doc_id>.json
+      pass2/         pass2_consistency_<doc_id>.json
+
+  runs/
+    <run_id>/
+      run_manifest.json
+      logs/
+      outputs/
+
+  README.md
+\end{verbatim}
+
+\subsection{Artifact naming conventions}
+Intermediate artifacts are persisted intentionally to enable debugging and stage contribution analysis:
+\begin{itemize}
+    \item \texttt{baseline\_report\_<doc\_id>.json}
+    \item \texttt{cosine\_resolved\_report\_<doc\_id>.json}
+    \item \texttt{preprocessed\_<doc\_id>.json}
+    \item \texttt{pass1\_audit\_<doc\_id>.json}
+    \item \texttt{pass2\_consistency\_<doc\_id>.json}
+\end{itemize}
+
+
+\section{Appendix B: Configuration Files (Thresholds and Pipeline Execution)}
+\label{app:config_files}
+
+Thresholds and stage toggles are externalized to configuration files. Externalizing parameters avoids hard-coded ``magic constants'' and enables controlled tuning and sensitivity analysis in the evaluation.
+
+\subsection{Threshold configuration (example)}
+\begin{verbatim}
+# config/thresholds.yaml
+baseline:
+  empty_min_chars: 40
+  prose_min_chars_for_dup_check: 150
+
+cosine:
+  section_rescue_threshold: 0.55
+  placeholder_heading_threshold: 0.95
+  guidance_copy_threshold: 0.99
+  duplicate_threshold: 0.98
+  legal_note_min_similarity: 0.85
+\end{verbatim}
+
+\subsection{Pipeline execution configuration (example)}
+\begin{verbatim}
+# config/pipeline.yaml
+stages:
+  run_baseline: true
+  run_cosine: true
+  run_preprocess: true
+  run_pass1: true
+  run_pass2: true
+
+paths:
+  template_spec: "data/template/expected_spec.json"
+  parsed_dir: "data/parsed"
+  baseline_dir: "data/reports/baseline"
+  cosine_dir: "data/reports/cosine"
+  preprocessed_dir: "data/reports/preprocessed"
+  pass1_dir: "data/reports/pass1"
+  pass2_dir: "data/reports/pass2"
+  runs_dir: "runs"
+\end{verbatim}
+
+
+\section{Appendix C: Prompt and Schema Versioning}
+\label{app:prompt_schema_versioning}
+
+Prompts and JSON schemas are treated as first-class versioned artifacts to ensure that audit outputs remain comparable across runs.
+
+\subsection{Prompt files}
+\begin{itemize}
+    \item \texttt{prompts/pass1\_system.txt}: integrity and semantic adequacy auditing (evidence-only, no unsupported claims).
+    \item \texttt{prompts/pass2\_system.txt}: entity extraction and cross-view consistency checks (BBV$\leftrightarrow$Runtime, BBV$\leftrightarrow$Deployment, Goals$\leftrightarrow$Decisions, Decisions$\leftrightarrow$Risks).
+\end{itemize}
+
+\subsection{Schema files}
+\begin{itemize}
+    \item \texttt{schemas/pass1\_schema.json}: structured output for Pass~1.
+    \item \texttt{schemas/pass2\_schema.json}: structured output for Pass~2.
+    \item \texttt{schemas/preprocessed\_schema.json}: validation schema for the preprocessed input representation (recommended).
+\end{itemize}
+
+
+\section{Appendix D: Run Metadata, Run Manifest, and CLI Specification}
+\label{app:run_metadata_cli}
+
+\subsection{Run metadata embedded in outputs}
+Each output artifact includes a \texttt{run\_metadata} block to support traceability and reproducibility:
+
+\begin{verbatim}
+{
+  "run_metadata": {
+    "run_id": "2026-01-14_01",
+    "tool_version": "git:<commit-hash>",
+    "template_id": "company_arc42_variant_vX",
+    "template_hash": "<sha256>",
+    "thresholds_file": "config/thresholds.yaml",
+    "thresholds_hash": "<sha256>",
+    "prompt_pass1_hash": "<sha256>",
+    "prompt_pass2_hash": "<sha256>",
+    "schema_pass1_hash": "<sha256>",
+    "schema_pass2_hash": "<sha256>",
+    "model_pass1": "<model-name>",
+    "model_pass2": "<model-name>",
+    "timestamp_utc": "2026-01-14T18:21:55Z"
+  }
+}
+\end{verbatim}
+
+\subsection{Run manifest per execution}
+A run manifest summarizes inputs, configuration, and outputs for a given run:
+
+\begin{verbatim}
+{
+  "run_id": "2026-01-14_01",
+  "timestamp_utc": "2026-01-14T18:21:55Z",
+  "tool_version": "git:<commit-hash>",
+  "inputs": {
+    "template_spec": "data/template/expected_spec.json",
+    "parsed_dir": "data/parsed",
+    "parsed_snapshot_hash": "<sha256>"
+  },
+  "configuration": {
+    "pipeline_yaml": "config/pipeline.yaml",
+    "thresholds_yaml": "config/thresholds.yaml",
+    "thresholds_hash": "<sha256>"
+  },
+  "prompts_and_schemas": {
+    "prompt_pass1": "prompts/pass1_system.txt",
+    "prompt_pass2": "prompts/pass2_system.txt",
+    "prompt_pass1_hash": "<sha256>",
+    "prompt_pass2_hash": "<sha256>",
+    "schema_pass1": "schemas/pass1_schema.json",
+    "schema_pass2": "schemas/pass2_schema.json",
+    "schema_pass1_hash": "<sha256>",
+    "schema_pass2_hash": "<sha256>"
+  },
+  "stages_executed": {
+    "baseline": true,
+    "cosine": true,
+    "preprocess": true,
+    "pass1": true,
+    "pass2": true
+  },
+  "counts": {
+    "documents_processed": 0,
+    "documents_failed": 0
+  },
+  "outputs": {
+    "baseline_dir": "data/reports/baseline",
+    "cosine_dir": "data/reports/cosine",
+    "preprocessed_dir": "data/reports/preprocessed",
+    "pass1_dir": "data/reports/pass1",
+    "pass2_dir": "data/reports/pass2"
+  }
+}
+\end{verbatim}
+
+\subsection{Command-line interface (CLI) specification}
+A unified runner script executes the pipeline deterministically.
+
+\paragraph{Usage}
+\begin{verbatim}
+python optimal/pipeline_runner.py --config config/pipeline.yaml --run-id 2026-01-14_01
+\end{verbatim}
+
+\paragraph{Arguments}
+\begin{itemize}
+    \item \texttt{--config <path>} (required): path to \texttt{pipeline.yaml}.
+    \item \texttt{--run-id <string>} (optional): unique run identifier; defaults to timestamp-based id.
+    \item \texttt{--doc-id <string>} (optional): run pipeline for a single document id only.
+    \item \texttt{--stages <list>} (optional): override selected stages (e.g., \texttt{baseline,cosine,preprocess,pass1,pass2}).
+    \item \texttt{--strict} (optional): fail the run on schema validation errors; otherwise record failures and continue.
+    \item \texttt{--log-level <level>} (optional): logging verbosity (e.g., INFO, WARNING, DEBUG).
+\end{itemize}
+
+\paragraph{Exit codes}
+\begin{itemize}
+    \item 0: success.
+    \item 2: configuration error (invalid or missing config).
+    \item 3: schema validation failure (strict mode).
+    \item 4: unexpected runtime error.
+\end{itemize}
