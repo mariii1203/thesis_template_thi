@@ -1,32 +1,32 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.10.27)  15 JAN 2026 02:08
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.1.17)  17 JAN 2026 00:21
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**c:/Users/User/thesis/report/thesis.tex
-(c:/Users/User/thesis/report/thesis.tex
-LaTeX2e <2025-06-01> patch level 1
-L3 programming layer <2025-10-09>
-(C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrartcl.cls
-Document Class: scrartcl 2025/09/09 v3.48 KOMA-Script document class (article)
-(C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrkbase.sty
-Package: scrkbase 2025/09/09 v3.48 KOMA-Script package (KOMA-Script-dependent basics and keyval usage)
- (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrbase.sty
-Package: scrbase 2025/09/09 v3.48 KOMA-Script package (KOMA-Script-independent basics and keyval usage)
- (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrlfile.sty
-Package: scrlfile 2025/09/09 v3.48 KOMA-Script package (file load hooks)
- (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrlfile-hook.sty
-Package: scrlfile-hook 2025/09/09 v3.48 KOMA-Script package (using LaTeX hooks)
- (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrlogo.sty
-Package: scrlogo 2025/09/09 v3.48 KOMA-Script package (logo)
-))) (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval.sty
+**c:/Users/user/Documents/GitHub/thesis_template/thesis.tex
+(c:/Users/user/Documents/GitHub/thesis_template/thesis.tex
+LaTeX2e <2025-11-01>
+L3 programming layer <2025-12-29>
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrartcl.cls
+Document Class: scrartcl 2025/12/01 v3.49 KOMA-Script document class (article)
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrkbase.sty
+Package: scrkbase 2025/12/01 v3.49 KOMA-Script package (KOMA-Script-dependent basics and keyval usage)
+ (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrbase.sty
+Package: scrbase 2025/12/01 v3.49 KOMA-Script package (KOMA-Script-independent basics and keyval usage)
+ (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrlfile.sty
+Package: scrlfile 2025/12/01 v3.49 KOMA-Script package (file load hooks)
+ (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrlfile-hook.sty
+Package: scrlfile-hook 2025/12/01 v3.49 KOMA-Script package (using LaTeX hooks)
+ (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrlogo.sty
+Package: scrlogo 2025/12/01 v3.49 KOMA-Script package (logo)
+))) (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval.sty
 Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
 \KV@toks@=\toks17
 )
 Applying: [2021/05/01] Usage of raw or classic option list on input line 254.
 Already applied: [0000/00/00] Usage of raw or classic option list on input line 370.
-)) (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\tocbasic.sty
-Package: tocbasic 2025/09/09 v3.48 KOMA-Script package (handling toc-files)
+)) (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\tocbasic.sty
+Package: tocbasic 2025/12/01 v3.49 KOMA-Script package (handling toc-files)
 \scr@dte@tocline@numberwidth=\skip49
 \scr@dte@tocline@numbox=\box53
 )
@@ -216,11 +216,11 @@ Class scrartcl Info: You've used standard option `oneside'.
 (scrartcl)           If you'd like to set the option with \KOMAoptions,
 (scrartcl)           you'd have to use `twoside=false' there
 (scrartcl)           instead of `oneside', too.
-Class scrartcl Info: File `scrsize11pt.clo' used to setup font sizes on input line 2486.
-(C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrsize11pt.clo
-File: scrsize11pt.clo 2025/09/09 v3.48 KOMA-Script font size class option (11pt)
-) (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\typearea.sty
-Package: typearea 2025/09/09 v3.48 KOMA-Script package (type area)
+Class scrartcl Info: File `scrsize11pt.clo' used to setup font sizes on input line 2487.
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrsize11pt.clo
+File: scrsize11pt.clo 2025/12/01 v3.49 KOMA-Script font size class option (11pt)
+) (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\typearea.sty
+Package: typearea 2025/12/01 v3.49 KOMA-Script package (type area)
 \ta@bcor=\skip50
 \ta@div=\count275
 Package typearea Info: You've used standard option `a4paper'.
@@ -255,7 +255,7 @@ Package typearea Info: These are the values describing the layout:
 (typearea)              \topskip        = 11.0pt
 (typearea)              \footskip       = 47.6pt
 (typearea)              \baselineskip   = 13.6pt
-(typearea)              on input line 1807.
+(typearea)              on input line 1808.
 )
 \c@part=\count276
 \c@section=\count277
@@ -265,79 +265,77 @@ Package typearea Info: These are the values describing the layout:
 \c@subparagraph=\count281
 \scr@dte@section@maxnumwidth=\skip55
 Class scrartcl Info: using compatibility default `runin=bysign'
-(scrartcl)           for `\section on input line 5161.
+(scrartcl)           for `\section on input line 5007.
 Class scrartcl Info: using compatibility default `afterindent=bysign'
-(scrartcl)           for `\section on input line 5161.
+(scrartcl)           for `\section on input line 5007.
 \scr@dte@part@maxnumwidth=\skip56
 Class scrartcl Info: using compatibility default `afterindent=false'
-(scrartcl)           for `\part on input line 5169.
+(scrartcl)           for `\part on input line 5015.
 \scr@dte@subsection@maxnumwidth=\skip57
 Class scrartcl Info: using compatibility default `runin=bysign'
-(scrartcl)           for `\subsection on input line 5179.
+(scrartcl)           for `\subsection on input line 5025.
 Class scrartcl Info: using compatibility default `afterindent=bysign'
-(scrartcl)           for `\subsection on input line 5179.
+(scrartcl)           for `\subsection on input line 5025.
 \scr@dte@subsubsection@maxnumwidth=\skip58
 Class scrartcl Info: using compatibility default `runin=bysign'
-(scrartcl)           for `\subsubsection on input line 5189.
+(scrartcl)           for `\subsubsection on input line 5035.
 Class scrartcl Info: using compatibility default `afterindent=bysign'
-(scrartcl)           for `\subsubsection on input line 5189.
+(scrartcl)           for `\subsubsection on input line 5035.
 \scr@dte@paragraph@maxnumwidth=\skip59
 Class scrartcl Info: using compatibility default `runin=bysign'
-(scrartcl)           for `\paragraph on input line 5200.
+(scrartcl)           for `\paragraph on input line 5046.
 Class scrartcl Info: using compatibility default `afterindent=bysign'
-(scrartcl)           for `\paragraph on input line 5200.
+(scrartcl)           for `\paragraph on input line 5046.
 \scr@dte@subparagraph@maxnumwidth=\skip60
 Class scrartcl Info: using compatibility default `runin=bysign'
-(scrartcl)           for `\subparagraph on input line 5210.
+(scrartcl)           for `\subparagraph on input line 5056.
 Class scrartcl Info: using compatibility default `afterindent=bysign'
-(scrartcl)           for `\subparagraph on input line 5210.
+(scrartcl)           for `\subparagraph on input line 5056.
 \abovecaptionskip=\skip61
 \belowcaptionskip=\skip62
 \c@pti@nb@sid@b@x=\box54
 Package tocbasic Info: omitting babel extension for `lof'
 (tocbasic)             because of feature `nobabel' available
-(tocbasic)             for `lof' on input line 6410.
+(tocbasic)             for `lof' on input line 6279.
 \scr@dte@figure@maxnumwidth=\skip63
 \c@figure=\count282
 Package tocbasic Info: omitting babel extension for `lot'
 (tocbasic)             because of feature `nobabel' available
-(tocbasic)             for `lot' on input line 6422.
+(tocbasic)             for `lot' on input line 6291.
 \scr@dte@table@maxnumwidth=\skip64
 \c@table=\count283
 Class scrartcl Info: Using old \@makefntext due to compatibility level
-(scrartcl)           less than 3.22 on input line 6579.
-Class scrartcl Info: Redefining `\numberline' on input line 6592.
+(scrartcl)           less than 3.22 on input line 6448.
+Class scrartcl Info: Redefining `\numberline' on input line 6461.
 \bibindent=\dimen148
-) (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/generic/babel\babel.sty
-Package: babel 2025/10/22 v25.14 The multilingual framework for LuaLaTeX, pdfLaTeX and XeLaTeX
+) (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/babel\babel.sty
+Package: babel 2025/12/30 v25.18 The multilingual framework for LuaLaTeX, pdfLaTeX and XeLaTeX
 \babel@savecnt=\count284
-LaTeX Encoding Info:    Redeclaring text command \ij (encoding OT1) on input line 2050.
-LaTeX Encoding Info:    Redeclaring text command \IJ (encoding OT1) on input line 2052.
-LaTeX Encoding Info:    Redeclaring text command \ij (encoding T1) on input line 2054.
-LaTeX Encoding Info:    Redeclaring text command \IJ (encoding T1) on input line 2055.
-LaTeX Encoding Info:    Ignoring declaration for text command \ij (encoding ?) on input line 2056.
-LaTeX Encoding Info:    Ignoring declaration for text command \IJ (encoding ?) on input line 2058.
-LaTeX Encoding Info:    Ignoring declaration for text command \SS (encoding ?) on input line 2083.
+LaTeX Encoding Info:    Redeclaring text command \ij (encoding OT1) on input line 2068.
+LaTeX Encoding Info:    Redeclaring text command \IJ (encoding OT1) on input line 2070.
+LaTeX Encoding Info:    Redeclaring text command \ij (encoding T1) on input line 2072.
+LaTeX Encoding Info:    Redeclaring text command \IJ (encoding T1) on input line 2073.
+LaTeX Encoding Info:    Ignoring declaration for text command \ij (encoding ?) on input line 2074.
+LaTeX Encoding Info:    Ignoring declaration for text command \IJ (encoding ?) on input line 2076.
+LaTeX Encoding Info:    Ignoring declaration for text command \SS (encoding ?) on input line 2101.
 \U@D=\dimen149
 \l@unhyphenated=\language79
- (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/generic/babel\txtbabel.def)
+ (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/babel\txtbabel.def)
 \bbl@readstream=\read2
 \bbl@dirlevel=\count285
-
-
-Package babel Warning: Configuration files are deprecated, as
-(babel)                they can break document portability.
-(babel)                Reported on input line 4172.
+Package babel Info: Configuration files are deprecated, as
+(babel)             they can break document portability.
+(babel)             Reported on input line 4197.
 
 *************************************
 * Local config file bblopts.cfg used
 *
-(C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/arabi\bblopts.cfg
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/arabi\bblopts.cfg
 File: bblopts.cfg 2005/09/08 v0.1 add Arabic and Farsi to "declared" options of babel
-) (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/generic/babel/locale/en\babel-english.tex)
+) (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/babel/locale/en\babel-english.tex)
 Package babel Info: Importing font and identification data for english
-(babel)             from babel-en.ini. Reported on input line 4295.
- (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/babel-english\english.ldf
+(babel)             from babel-en.ini. Reported on input line 4321.
+ (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/babel-english\english.ldf
 Language: english 2017/06/06 v3.3r English support from the babel system
 Package babel Info: Hyphen rules for 'canadian' set to \l@english
 (babel)             (\language0). Reported on input line 102.
@@ -345,30 +343,34 @@ Package babel Info: Hyphen rules for 'australian' set to \l@ukenglish
 (babel)             (\language73). Reported on input line 105.
 Package babel Info: Hyphen rules for 'newzealand' set to \l@ukenglish
 (babel)             (\language73). Reported on input line 108.
-)) (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/base\fontenc.sty
-Package: fontenc 2024/12/21 v2.1c Standard LaTeX package
-) (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/base\inputenc.sty
+)) (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/base\fontenc.sty
+Package: fontenc 2025/07/18 v2.1d Standard LaTeX package
+) (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/base\inputenc.sty
 Package: inputenc 2024/02/08 v1.3d Input encoding file
 \inpenc@prehook=\toks18
 \inpenc@posthook=\toks19
-) (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphicx.sty
+) (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphicx.sty
 Package: graphicx 2024/12/31 v1.2e Enhanced LaTeX Graphics (DPC,SPQR)
- (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphics.sty
+ (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphics.sty
 Package: graphics 2024/08/06 v1.4g Standard LaTeX Graphics (DPC,SPQR)
- (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.sty
+ (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.sty
 Package: trig 2023/12/02 v1.11 sin cos tan (DPC)
-) (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\graphics.cfg
+) (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\graphics.cfg
 File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: pdftex.def on input line 106.
- (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\pdftex.def
+ (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\pdftex.def
 File: pdftex.def 2025/09/29 v1.2d Graphics/color driver for pdftex
 ))
 \Gin@req@height=\dimen150
 \Gin@req@width=\dimen151
-) (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption.sty
+) (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption.sty
 Package: caption 2023/08/05 v3.6o Customizing captions (AR)
- (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption3.sty
+
+Package tocbasic Info: Loading of class-dependent code for package caption3
+(tocbasic)             prevented on line 50.
+
+ (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption3.sty
 Package: caption3 2023/07/31 v2.4d caption3 kernel (AR)
 \caption@tempdima=\dimen152
 \captionmargin=\dimen153
@@ -378,36 +380,28 @@ Package: caption3 2023/07/31 v2.4d caption3 kernel (AR)
 \caption@indent=\dimen157
 \caption@parindent=\dimen158
 \caption@hangindent=\dimen159
-Package caption Info: Unknown document class (or package),
-(caption)             standard defaults will be used.
-Package caption Info: \@makecaption = \long macro:#1#2->\@abovecaptionbreak \vskip \abovecaptionskip \@abovecaptionbreak \@@makecaption \@firstofone {#1}{#2}\@belowcaptionbreak \vskip \belowcaptionskip \@belowcaptionbreak  on input line 1175.
 )
-
-Package caption Warning: Unknown document class (or package),
-(caption)                standard defaults will be used.
-See the caption package documentation for explanation.
-
 \c@caption@flags=\count286
 \c@continuedfloat=\count287
-) (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/float\float.sty
+) (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/float\float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \c@float@type=\count288
 \float@exts=\toks20
 \float@box=\box55
 \@float@everytoks=\toks21
 \@floatcapt=\box56
-) (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/wrapfig\wrapfig.sty
+) (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/wrapfig\wrapfig.sty
 \wrapoverhang=\dimen160
 \WF@size=\dimen161
 \c@WF@wrappedlines=\count289
 \WF@box=\box57
 \WF@everypar=\toks22
 Package: wrapfig 2003/01/31  v 3.6
-) (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.sty
+) (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.sty
 Package: geometry 2020/01/02 v5.9 Page Geometry
- (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/generic/iftex\ifvtex.sty
+ (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/iftex\ifvtex.sty
 Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
- (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/generic/iftex\iftex.sty
+ (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/iftex\iftex.sty
 Package: iftex 2024/12/12 v1.0g TeX engine tests
 ))
 \Gm@cnth=\count290
@@ -422,9 +416,9 @@ Package: iftex 2024/12/12 v1.0g TeX engine tests
 \Gm@layouthoffset=\dimen168
 \Gm@layoutvoffset=\dimen169
 \Gm@dimlist=\toks23
- (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.cfg)) (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/blindtext\blindtext.sty
+ (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.cfg)) (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/blindtext\blindtext.sty
 Package: blindtext 2012/01/06 V2.0 blindtext-Package
- (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/tools\xspace.sty
+ (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/tools\xspace.sty
 Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
 )
 \c@blindtext=\count293
@@ -445,7 +439,7 @@ Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
 \c@blind@randommax=\count308
 \c@blind@pangramcount=\count309
 \c@blind@pangrammax=\count310
-) (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/tools\layout.sty
+) (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/tools\layout.sty
 Package: layout 2023-08-20 v1.2e Show layout parameters
 \oneinch=\count311
 \cnt@paperwidth=\count312
@@ -478,54 +472,54 @@ Package: layout 2023-08-20 v1.2e Show layout parameters
 \PositionX=\count339
 \PositionY=\count340
 \ArrowLength=\count341
-) (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hyperref.sty
+) (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hyperref.sty
 Package: hyperref 2025-07-12 v7.01o Hypertext links for LaTeX
- (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/kvsetkeys\kvsetkeys.sty
+ (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/kvsetkeys\kvsetkeys.sty
 Package: kvsetkeys 2022-10-05 v1.19 Key value parser (HO)
-) (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/generic/kvdefinekeys\kvdefinekeys.sty
+) (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/kvdefinekeys\kvdefinekeys.sty
 Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
-) (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/generic/pdfescape\pdfescape.sty
+) (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/pdfescape\pdfescape.sty
 Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
- (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/generic/ltxcmds\ltxcmds.sty
+ (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/ltxcmds\ltxcmds.sty
 Package: ltxcmds 2023-12-04 v1.26 LaTeX kernel commands for general use (HO)
-) (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/generic/pdftexcmds\pdftexcmds.sty
+) (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/pdftexcmds\pdftexcmds.sty
 Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO)
- (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/generic/infwarerr\infwarerr.sty
+ (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/infwarerr\infwarerr.sty
 Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
 )
 Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
 Package pdftexcmds Info: \pdfdraftmode found.
-)) (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/hycolor\hycolor.sty
+)) (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/hycolor\hycolor.sty
 Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
-) (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\nameref.sty
+) (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\nameref.sty
 Package: nameref 2025-06-21 v2.57 Cross-referencing by name of section
- (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/refcount\refcount.sty
+ (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/refcount\refcount.sty
 Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
-) (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/generic/gettitlestring\gettitlestring.sty
+) (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/gettitlestring\gettitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
- (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/kvoptions\kvoptions.sty
+ (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/kvoptions\kvoptions.sty
 Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
 ))
 \c@section@level=\count342
-) (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/etoolbox\etoolbox.sty
+) (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/etoolbox\etoolbox.sty
 Package: etoolbox 2025/10/02 v2.5m e-TeX tools for LaTeX (JAW)
 \etb@tempcnta=\count343
-) (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/generic/stringenc\stringenc.sty
+) (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/stringenc\stringenc.sty
 Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO)
 )
 \@linkdim=\dimen170
 \Hy@linkcounter=\count344
 \Hy@pagecounter=\count345
- (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\pd1enc.def
+ (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\pd1enc.def
 File: pd1enc.def 2025-07-12 v7.01o Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
 ... no UTF-8 mapping file for font encoding PD1
-) (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/generic/intcalc\intcalc.sty
+) (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/intcalc\intcalc.sty
 Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 )
 \Hy@SavedSpaceFactor=\count346
- (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\puenc.def
+ (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\puenc.def
 File: puenc.def 2025-07-12 v7.01o Hyperref: PDF Unicode definition (HO)
 Now handling font encoding PU ...
 ... no UTF-8 mapping file for font encoding PU
@@ -539,15 +533,15 @@ Package hyperref Info: Backreferencing OFF on input line 4215.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4462.
 \c@Hy@tempcnt=\count347
- (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/url\url.sty
+ (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/url\url.sty
 \Urlmuskip=\muskip17
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
 LaTeX Info: Redefining \url on input line 4801.
 \XeTeXLinkMargin=\dimen171
- (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/generic/bitset\bitset.sty
+ (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/bitset\bitset.sty
 Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
- (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/generic/bigintcalc\bigintcalc.sty
+ (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/bigintcalc\bigintcalc.sty
 Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO)
 ))
 \Fld@menulength=\count348
@@ -565,29 +559,29 @@ Package hyperref Info: PDF/A mode OFF on input line 6108.
 \c@Hfootnote=\count351
 )
 Package hyperref Info: Driver (autodetected): hpdftex.
- (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hpdftex.def
+ (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hpdftex.def
 File: hpdftex.def 2025-07-12 v7.01o Hyperref driver for pdfTeX
 \Fld@listcount=\count352
 \c@bookmark@seq@number=\count353
- (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/rerunfilecheck\rerunfilecheck.sty
+ (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/rerunfilecheck\rerunfilecheck.sty
 Package: rerunfilecheck 2025-06-21 v1.11 Rerun checks for auxiliary files (HO)
- (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/generic/uniquecounter\uniquecounter.sty
+ (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/uniquecounter\uniquecounter.sty
 Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
 )
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 284.
 )
 \Hy@SectionHShift=\skip65
-) (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/natbib\natbib.sty
+) (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/natbib\natbib.sty
 Package: natbib 2010/09/13 8.31b (PWD, AO)
 \bibhang=\skip66
 \bibsep=\skip67
 LaTeX Info: Redefining \cite on input line 694.
 \c@NAT@ctr=\count354
-) (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/pdfpages\pdfpages.sty
+) (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/pdfpages\pdfpages.sty
 Package: pdfpages 2025/07/23 v0.6g Insert pages of external PDF documents (AM)
- (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/base\ifthen.sty
+ (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/base\ifthen.sty
 Package: ifthen 2024/03/16 v1.1e Standard LaTeX ifthen package (DPC)
-) (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/tools\calc.sty
+) (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/tools\calc.sty
 Package: calc 2025/03/01 v4.3b Infix arithmetic (KKT,FJ)
 \calc@Acount=\count355
 \calc@Bcount=\count356
@@ -599,17 +593,17 @@ LaTeX Info: Redefining \setlength on input line 86.
 LaTeX Info: Redefining \addtolength on input line 87.
 \calc@Ccount=\count357
 \calc@Cskip=\skip70
-) (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/eso-pic\eso-pic.sty
-Package: eso-pic 2023/05/03 v3.0c eso-pic (RN)
+) (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/eso-pic\eso-pic.sty
+Package: eso-pic 2025/12/10 v3.0d eso-pic (RN)
 \ESO@tempdima=\dimen176
 \ESO@tempdimb=\dimen177
- (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/xcolor\xcolor.sty
+ (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/xcolor\xcolor.sty
 Package: xcolor 2024/09/29 v3.02 LaTeX color extensions (UK)
- (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\color.cfg
+ (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\color.cfg
 File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
 Package xcolor Info: Driver file: pdftex.def on input line 274.
- (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/graphics\mathcolor.ltx)
+ (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/graphics\mathcolor.ltx)
 Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1349.
 Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1353.
 Package xcolor Info: Model `RGB' extended on input line 1365.
@@ -623,7 +617,7 @@ Package xcolor Info: Model `wave' substituted by `hsb' on input line 1372.
 \AM@pagewidth=\dimen178
 \AM@pageheight=\dimen179
 \AM@fboxrule=\dimen180
- (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/pdfpages\pppdftex.def
+ (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/pdfpages\pppdftex.def
 File: pppdftex.def 2025/07/23 v0.6g Pdfpages driver for pdfTeX (AM)
 )
 \pdfpages@includegraphics@status=\count358
@@ -634,10 +628,10 @@ File: pppdftex.def 2025/07/23 v0.6g Pdfpages driver for pdfTeX (AM)
 \AM@lof@heading=\toks26
 \c@AM@survey=\count360
 \AM@templatesizebox=\box59
-) (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/setspace\setspace.sty
+) (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/setspace\setspace.sty
 Package: setspace 2022/12/04 v6.7b set line spacing
-) (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/tools\longtable.sty
-Package: longtable 2024-12-18 v4.23 Multi-page Table package (DPC)
+) (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/tools\longtable.sty
+Package: longtable 2025-10-13 v4.24 Multi-page Table package (DPC)
 \LTleft=\skip71
 \LTright=\skip72
 \LTpre=\skip73
@@ -656,16 +650,16 @@ Package: longtable 2024-12-18 v4.23 Multi-page Table package (DPC)
 \LT@p@ftn=\toks27
 )
 Class scrartcl Info: longtable captions redefined on input line 55.
- (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/multirow\multirow.sty
+ (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/multirow\multirow.sty
 Package: multirow 2024/11/12 v2.9 Span multiple rows of a table
 \multirow@colwidth=\skip75
 \multirow@cntb=\count366
 \multirow@dima=\skip76
 \bigstrutjot=\dimen182
-) (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/colortbl\colortbl.sty
+) (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/colortbl\colortbl.sty
 Package: colortbl 2024/10/29 v1.0k Color table columns (DPC)
- (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/tools\array.sty
-Package: array 2025/06/08 v2.6j Tabular extension package (FMi)
+ (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/tools\array.sty
+Package: array 2025/09/25 v2.6n Tabular extension package (FMi)
 \col@sep=\dimen183
 \ar@mcellbox=\box65
 \extrarowheight=\dimen184
@@ -677,10 +671,10 @@ Package: array 2025/06/08 v2.6j Tabular extension package (FMi)
 \everycr=\toks29
 \minrowclearance=\skip79
 \rownum=\count367
-) (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrlayer-scrpage.sty
-Package: scrlayer-scrpage 2025/09/09 v3.48 KOMA-Script package (end user interface for scrlayer)
- (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrlayer.sty
-Package: scrlayer 2025/09/09 v3.48 KOMA-Script package (defining layers and page styles)
+) (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrlayer-scrpage.sty
+Package: scrlayer-scrpage 2025/12/01 v3.49 KOMA-Script package (end user interface for scrlayer)
+ (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrlayer.sty
+Package: scrlayer 2025/12/01 v3.49 KOMA-Script package (defining layers and page styles)
 Package scrlayer Info: patching LaTeX kernel macro \pagestyle on input line 2179.
 )
 Package scrlayer-scrpage Info: Makeing stand-alone element `pagehead' from
@@ -716,48 +710,48 @@ Package scrlayer-scrpage Warning: Command deprecated!
 (scrlayer-scrpage)                `\setkomafont' or `\addtokomafont' to
 (scrlayer-scrpage)                setup the colour on input line 73.
 
-(C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/glossaries/base\glossaries.sty
-Package: glossaries 2025/08/11 v4.8 (NLCT)
- (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/xkeyval\xkeyval.sty
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/glossaries/base\glossaries.sty
+Package: glossaries 2025/11/09 v4.9 (NLCT)
+ (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/xkeyval\xkeyval.sty
 Package: xkeyval 2022/06/16 v2.9 package option processing (HA)
- (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/generic/xkeyval\xkeyval.tex (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/generic/xkeyval\xkvutils.tex
+ (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/xkeyval\xkeyval.tex (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/xkeyval\xkvutils.tex
 \XKV@toks=\toks30
 \XKV@tempa@toks=\toks31
 )
 \XKV@depth=\count368
 File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
-)) (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/mfirstuc\mfirstuc.sty
+)) (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/mfirstuc\mfirstuc.sty
 Package: mfirstuc 2025/04/03 v2.09 (NLCT)
 \@glsmfirst=\toks32
 \@glsmrest=\toks33
-) (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/xfor\xfor.sty
+) (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/xfor\xfor.sty
 Package: xfor 2009/02/05 v1.05 (NLCT)
-) (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsgen.sty
+) (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
 \@emptytoks=\toks34
 \ex@=\dimen185
-) (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/tracklang\tracklang.sty
+) (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/tracklang\tracklang.sty
 Package: tracklang 2025/03/11 v1.6.6 (NLCT) Track Languages
- (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/generic/tracklang\tracklang.tex)
+ (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/generic/tracklang\tracklang.tex)
 Package tracklang Info: Tracking dialect `english' (language `english') on input line 264.
 Package tracklang Info: Tracking dialect `english' (language `english') on input line 264.
-) (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/translator\translator.sty
+) (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/translator\translator.sty
 Package: translator 2021-05-31 v1.12d Easy translation of strings in LaTeX
-) (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/glossaries-english\glossaries-english.ldf
+) (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/glossaries-english\glossaries-english.ldf
 File: glossaries-english.ldf 2014/11/23 v1.0
-) (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/datatool\datatool-base.sty
-Package: datatool-base 2025/04/25 v3.4.1 (NLCT)
- (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsmath.sty
-Package: amsmath 2025/06/16 v2.17y AMS math features
+) (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/datatool\datatool-base.sty
+Package: datatool-base 2025/12/04 v3.4.3 (NLCT)
+ (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsmath.sty
+Package: amsmath 2025/07/09 v2.17z AMS math features
 \@mathmargin=\skip80
 
 For additional information on amsmath, use the `?' option.
-(C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amstext.sty
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amstext.sty
 Package: amstext 2024/11/17 v2.01 AMS text
-) (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsbsy.sty
+) (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
 \pmbraise@=\dimen186
-) (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsopn.sty
+) (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsopn.sty
 Package: amsopn 2022/04/08 v2.04 operator names
 )
 \inf@bad=\count369
@@ -805,28 +799,29 @@ LaTeX Info: Redefining \Relbar on input line 970.
 \multlinegap=\skip81
 \multlinetaggap=\skip82
 \mathdisplay@stack=\toks38
-LaTeX Info: Redefining \[ on input line 2949.
-LaTeX Info: Redefining \] on input line 2950.
-) (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/datatool\datatool-l3fp.def
-File: datatool-l3fp.def 2025/04/25 v3.4.1 (NLCT)
+LaTeX Info: Redefining \[ on input line 2950.
+LaTeX Info: Redefining \] on input line 2951.
 )
-\@dtl@toks=\toks39
-\@dtl@tmpcount=\count381
-\dtl@tmplength=\skip83
-\l__datatool_measure_box=\box69
-\dtl@sortresult=\count382
- (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/datatool\datatool-utf8.ldf
-File: datatool-utf8.ldf 2025/04/25 v3.4.1 (NLCT)
-)
-\@dtl@datatype=\count383
-\l__datatool_tmpa_int=\count384
-\l__datatool_tmpb_int=\count385
-\l__datatool_tmpc_int=\count386
-\l__datatool_tmpd_int=\count387
-\l__datatool_count_int=\count388
-\l__datatool_tmp_datatype_int=\count389
+\l__datatool_tmpa_int=\count381
+\l__datatool_tmpb_int=\count382
+\l__datatool_tmpc_int=\count383
+\l__datatool_tmpd_int=\count384
+\l__datatool_count_int=\count385
+\l__datatool_tmp_datatype_int=\count386
 \l__datatool_tmpa_dim=\dimen194
 \l__datatool_tmpb_dim=\dimen195
+ (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/datatool\datatool-l3fp.def
+File: datatool-l3fp.def 2025/12/04 v3.4.3 (NLCT)
+)
+\@dtl@toks=\toks39
+\@dtl@tmpcount=\count387
+\dtl@tmplength=\skip83
+\l__datatool_measure_box=\box69
+\dtl@sortresult=\count388
+ (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/datatool\datatool-utf8.ldf
+File: datatool-utf8.ldf 2025/12/04 v3.4.3 (NLCT)
+)
+\@dtl@datatype=\count389
 \c_datatool_unknown_int=\count390
 \l__datatool_year_int=\count391
 \l__datatool_month_int=\count392
@@ -843,7 +838,7 @@ File: datatool-utf8.ldf 2025/04/25 v3.4.1 (NLCT)
 \@dtl@foreach@level=\count403
 
 
-Package tracklang Warning: No `datatool' support for dialect `english'  on input line 9908.
+Package tracklang Warning: No `datatool' support for dialect `english'  on input line 9924.
 
 \dtl@codeA=\count404
 \dtl@codeB=\count405
@@ -857,19 +852,19 @@ Package tracklang Warning: No `datatool' support for dialect `english'  on input
 \glslabeltok=\toks42
 \glsshorttok=\toks43
 \glslongtok=\toks44
- (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/glossaries/styles\glossary-hypernav.sty
-Package: glossary-hypernav 2025/08/11 v4.8 (NLCT)
-) (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/glossaries/styles\glossary-list.sty
-Package: glossary-list 2025/08/11 v4.8 (NLCT)
+ (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/glossaries/styles\glossary-hypernav.sty
+Package: glossary-hypernav 2025/11/09 v4.9 (NLCT)
+) (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/glossaries/styles\glossary-list.sty
+Package: glossary-list 2025/11/09 v4.9 (NLCT)
 \glslistdottedwidth=\skip85
-) (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/glossaries/styles\glossary-long.sty
-Package: glossary-long 2025/08/11 v4.8 (NLCT)
+) (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/glossaries/styles\glossary-long.sty
+Package: glossary-long 2025/11/09 v4.9 (NLCT)
 \glsdescwidth=\skip86
 \glspagelistwidth=\skip87
-) (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/glossaries/styles\glossary-super.sty
-Package: glossary-super 2025/08/11 v4.8 (NLCT)
- (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/supertabular\supertabular.sty
-Package: supertabular 2024/07/20 v4.2c the supertabular environment
+) (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/glossaries/styles\glossary-super.sty
+Package: glossary-super 2025/11/09 v4.9 (NLCT)
+ (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/supertabular\supertabular.sty
+Package: supertabular 2025/06/26 v4.2d the supertabular environment
 \c@tracingst=\count407
 \ST@wd=\dimen198
 \ST@rightskip=\skip88
@@ -885,8 +880,8 @@ Package: supertabular 2024/07/20 v4.2c the supertabular environment
 \ST@toadd=\dimen262
 \ST@dimen=\dimen263
 \ST@pbox=\box70
-)) (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/glossaries/styles\glossary-tree.sty
-Package: glossary-tree 2025/08/11 v4.8 (NLCT)
+)) (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/glossaries/styles\glossary-tree.sty
+Package: glossary-tree 2025/11/09 v4.9 (NLCT)
 \l__glossaries_tree_max_known_level_int=\count408
 \l__glossaries_tree_offset_dim=\dimen264
 \l__glossaries_tree_namewidth_dim=\dimen265
@@ -909,7 +904,7 @@ Package glossaries Info: Writing glossary file thesis.glo on input line 114.
 \openout5 = `thesis.acn'.
 
 Package glossaries Info: Writing glossary file thesis.acn on input line 114.
- (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/nomencl\nomencl.sty
+ (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/nomencl\nomencl.sty
 Package: nomencl 2021/11/10 v5.6 Nomenclature package
 Package tocbasic Info: setting babel extension for `nlo' on input line 187.
 Package tocbasic Info: setting babel extension for `nls' on input line 188.
@@ -929,12 +924,12 @@ Class scrartcl Info: loading recommended package `bookmark'.
 (scrartcl)           you can avoid this message adding:
 (scrartcl)             \usepackage{bookmark}
 (scrartcl)           before \begin{document} on input line 144.
- (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/bookmark\bookmark.sty
+ (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/bookmark\bookmark.sty
 Package: bookmark 2023-12-10 v1.31 PDF bookmarks (HO)
- (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/bookmark\bkm-pdftex.def
+ (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/bookmark\bkm-pdftex.def
 File: bkm-pdftex.def 2023-12-10 v1.31 bookmark driver for pdfTeX and luaTeX (HO)
 \BKM@id=\count410
-)) (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
+)) (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
 File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count411
 )
@@ -972,7 +967,7 @@ Package scrbase Info: activating english \listfigurename on input line 144.
 Package scrbase Info: activating english \listtablename on input line 144.
 Package scrbase Info: activating english \refname on input line 144.
 Package scrbase Info: activating english \indexname on input line 144.
- (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
+ (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count412
 \scratchdimen=\dimen275
@@ -985,17 +980,17 @@ Package scrbase Info: activating english \indexname on input line 144.
 \MPnumerator=\count416
 \makeMPintoPDFobject=\count417
 \everyMPtoPDFconversion=\toks46
-) (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-base.sty
+) (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
- (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys.cfg
+ (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: hyperref package is loaded.
 Package caption Info: longtable package is loaded.
- (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/caption\ltcaption.sty
+ (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/caption\ltcaption.sty
 Package: ltcaption 2021/01/08 v1.4c longtable captions (AR)
 )
 Package caption Info: supertabular package is loaded.
@@ -1037,11 +1032,11 @@ Package caption Info: End \AtBeginDocument code.
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 Package hyperref Info: Link coloring ON on input line 144.
-(C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/pdflscape\pdflscape.sty
+(C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/pdflscape\pdflscape.sty
 Package: pdflscape 2022-10-27 v0.13 Display of landscape pages in PDF
- (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/pdflscape\pdflscape-nometadata.sty
+ (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/pdflscape\pdflscape-nometadata.sty
 Package: pdflscape-nometadata 2022-10-28 v0.13 Display of landscape pages in PDF (HO)
- (C:\Users\User\AppData\Local\Programs\MiKTeX\tex/latex/graphics\lscape.sty
+ (C:\Users\user\AppData\Local\Programs\MiKTeX\tex/latex/graphics\lscape.sty
 Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
 )
 Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
@@ -1090,15 +1085,13 @@ File: images/thiRGB.jpg Graphic file (type jpg)
 <use images/thiRGB.jpg>
 Package pdftex.def Info: images/thiRGB.jpg  used on input line 9.
 (pdftex.def)             Requested size: 450.69417pt x 211.5088pt.
-
-
 [1
 
 \openout3 = `thesis.ist'.
 
 
 
-{C:/Users/User/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map} <./images/thiRGB.jpg>])
+{C:/Users/user/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map} <./images/thiRGB.jpg>])
 \openout2 = `affidavit.aux'.
 
  (affidavit.tex
@@ -1111,9 +1104,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 6--8
 
  []
 
-)
-
-[1
+) [1
 
 
 
@@ -1123,9 +1114,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 6--8
 ]
 \openout2 = `acknowledgments.aux'.
 
- (acknowledgments.tex)
-
-[2
+ (acknowledgments.tex) [2
 
 
 
@@ -1134,9 +1123,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 6--8
 ]
 \openout2 = `abstractEN.aux'.
 
- (abstractEN.tex)
-
-[3
+ (abstractEN.tex) [3
 
 
 
@@ -1155,9 +1142,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 8--10
 
  []
 
-)
-
-[4
+) [4
 
 
 
@@ -1177,8 +1162,6 @@ No file thesis.nls.
 )
 No file thesis.gls.
 No file thesis.acr.
-
-
 
 Class scrartcl Warning: Usage of deprecated command `\ifthispageodd'.
 (scrartcl)              The command has been renamed because of a
@@ -1202,27 +1185,20 @@ Class scrartcl Warning: Usage of deprecated command `\ifthispageodd'.
 \tf@lof=\write8
 \openout8 = `thesis.lof'.
 
-
-
-[6
+ [6
 
 
 ] (thesis.lot)
 \tf@lot=\write9
 \openout9 = `thesis.lot'.
 
+ [7
 
 
-[7
-
-
-] (thesis.toc
-
-[8
+] (thesis.toc [8
 
 
 ]
-
 
 Class scrartcl Warning: Usage of deprecated command `\ifthispageodd'.
 (scrartcl)              The command has been renamed because of a
@@ -1232,7 +1208,6 @@ Class scrartcl Warning: Usage of deprecated command `\ifthispageodd'.
 [9])
 \tf@toc=\write10
 \openout10 = `thesis.toc'.
-
 
 
 
@@ -1258,13 +1233,11 @@ Package natbib Warning: Citation `documentation_debt' on page 1 undefined on inp
 Package natbib Warning: Citation `arc42' on page 1 undefined on input line 9.
 
 
-
-
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.27     \item \textbf
-                      {False completeness:} Template remnants and placeholde... [1
+l.22 \end{quote}
+                 [1
 
 
 
@@ -1276,12 +1249,10 @@ Package natbib Warning: Citation `iso42010' on page 2 undefined on input line 28
 Package natbib Warning: Citation `arc42' on page 2 undefined on input line 28.
 
 
-
-
 Class scrartcl Warning: Usage of deprecated command `\ifthispageodd'.
 (scrartcl)              The command has been renamed because of a
 (scrartcl)              recommendation of The LaTeX Project Team.
-(scrartcl)              Please replace `\ifthispageodd' by `\Ifthispageodd' on input line 58.
+(scrartcl)              Please replace `\ifthispageodd' by `\Ifthispageodd' on input line 56.
 
 [2]
 
@@ -1298,15 +1269,12 @@ Overfull \hbox (23.32216pt too wide) in paragraph at lines 79--80
  []
 
 
-
-
 Class scrartcl Warning: Usage of deprecated command `\ifthispageodd'.
 (scrartcl)              The command has been renamed because of a
 (scrartcl)              recommendation of The LaTeX Project Team.
-(scrartcl)              Please replace `\ifthispageodd' by `\Ifthispageodd' on input line 85.
+(scrartcl)              Please replace `\ifthispageodd' by `\Ifthispageodd' on input line 80.
 
 [3])
-
 
 Class scrartcl Warning: Usage of deprecated command `\ifthispageodd'.
 (scrartcl)              The command has been renamed because of a
@@ -1341,8 +1309,6 @@ Package natbib Warning: Citation `naab_sad_survey' on page 5 undefined on input 
 
 Package natbib Warning: Citation `mendes_doc_td' on page 5 undefined on input line 14.
 
-
-
 [5]
 
 Package natbib Warning: Citation `iso42010' on page 6 undefined on input line 17.
@@ -1360,8 +1326,6 @@ Package natbib Warning: Citation `arc42_template' on page 6 undefined on input l
 Package natbib Warning: Citation `arc42_template' on page 6 undefined on input line 33.
 
 
-
-
 Class scrartcl Warning: Usage of deprecated command `\ifthispageodd'.
 (scrartcl)              The command has been renamed because of a
 (scrartcl)              recommendation of The LaTeX Project Team.
@@ -1373,8 +1337,6 @@ Package natbib Warning: Citation `arc42_template' on page 7 undefined on input l
 
 
 Package natbib Warning: Citation `arc42_template' on page 7 undefined on input line 53.
-
-
 
 
 Class scrartcl Warning: Usage of deprecated command `\ifthispageodd'.
@@ -1396,8 +1358,6 @@ Package natbib Warning: Citation `iso42010' on page 8 undefined on input line 72
 Package natbib Warning: Citation `mendes_doc_td' on page 8 undefined on input line 81.
 
 
-
-
 Class scrartcl Warning: Usage of deprecated command `\ifthispageodd'.
 (scrartcl)              The command has been renamed because of a
 (scrartcl)              recommendation of The LaTeX Project Team.
@@ -1411,8 +1371,6 @@ Package natbib Warning: Citation `wohlrab_icsa19_guidelines' on page 9 undefined
 Package natbib Warning: Citation `ardoco_icsa23_inconsistency_detection' on page 9 undefined on input line 90.
 
 
-
-
 Class scrartcl Warning: Usage of deprecated command `\ifthispageodd'.
 (scrartcl)              The command has been renamed because of a
 (scrartcl)              recommendation of The LaTeX Project Team.
@@ -1423,8 +1381,6 @@ Class scrartcl Warning: Usage of deprecated command `\ifthispageodd'.
 Package natbib Warning: Citation `iso42010' on page 10 undefined on input line 128.
 
 
-
-
 Class scrartcl Warning: Usage of deprecated command `\ifthispageodd'.
 (scrartcl)              The command has been renamed because of a
 (scrartcl)              recommendation of The LaTeX Project Team.
@@ -1432,14 +1388,12 @@ Class scrartcl Warning: Usage of deprecated command `\ifthispageodd'.
 
 [10]
 
-
 Class scrartcl Warning: Usage of deprecated command `\ifthispageodd'.
 (scrartcl)              The command has been renamed because of a
 (scrartcl)              recommendation of The LaTeX Project Team.
 (scrartcl)              Please replace `\ifthispageodd' by `\Ifthispageodd' on input line 162.
 
 [11])
-
 
 Class scrartcl Warning: Usage of deprecated command `\ifthispageodd'.
 (scrartcl)              The command has been renamed because of a
@@ -1468,8 +1422,6 @@ Package natbib Warning: Citation `cleland_huang_lsi_traceability' on page 13 und
 
 Package natbib Warning: Citation `recent_traceability_recovery' on page 13 undefined on input line 31.
 
-
-
 [13]
 
 Package natbib Warning: Citation `one_class_svm' on page 14 undefined on input line 45.
@@ -1482,8 +1434,6 @@ Package natbib Warning: Citation `llm4se_slr' on page 14 undefined on input line
 
 
 Package natbib Warning: Citation `llm4se_survey' on page 14 undefined on input line 61.
-
-
 
 
 Class scrartcl Warning: Usage of deprecated command `\ifthispageodd'.
@@ -1508,8 +1458,6 @@ Package natbib Warning: Citation `ardoco_icsa23_inconsistency_detection' on page
 Package natbib Warning: Citation `wohlrab_icsa19_guidelines' on page 15 undefined on input line 83.
 
 
-
-
 Class scrartcl Warning: Usage of deprecated command `\ifthispageodd'.
 (scrartcl)              The command has been renamed because of a
 (scrartcl)              recommendation of The LaTeX Project Team.
@@ -1527,8 +1475,6 @@ Package natbib Warning: Citation `ardoco_icsa23' on page 16 undefined on input l
 
 
 Package natbib Warning: Citation `llm4se_slr' on page 16 undefined on input line 95.
-
-
 
 
 Class scrartcl Warning: Usage of deprecated command `\ifthispageodd'.
@@ -1557,8 +1503,6 @@ Package natbib Warning: Citation `ardoco_icsa23' on page 17 undefined on input l
 Package natbib Warning: Citation `llm4se_slr' on page 17 undefined on input line 133.
 
 
-
-
 Class scrartcl Warning: Usage of deprecated command `\ifthispageodd'.
 (scrartcl)              The command has been renamed because of a
 (scrartcl)              recommendation of The LaTeX Project Team.
@@ -1566,15 +1510,12 @@ Class scrartcl Warning: Usage of deprecated command `\ifthispageodd'.
 
 [17])
 
-
 Class scrartcl Warning: Usage of deprecated command `\ifthispageodd'.
 (scrartcl)              The command has been renamed because of a
 (scrartcl)              recommendation of The LaTeX Project Team.
 (scrartcl)              Please replace `\ifthispageodd' by `\Ifthispageodd' on input line 12.
 
-[18] (4_Context/context.tex
-
-[19]
+[18] (4_Context/context.tex [19]
 Overfull \hbox (10.63513pt too wide) in paragraph at lines 39--40
 []\T1/cmr/m/n/10 The sys-tem shall val-i-date an ar-chi-tec-ture doc-u-ment against
  []
@@ -1585,15 +1526,12 @@ Overfull \hbox (0.27377pt too wide) in paragraph at lines 43--44
  []
 
 
-
-
 Class scrartcl Warning: Usage of deprecated command `\ifthispageodd'.
 (scrartcl)              The command has been renamed because of a
 (scrartcl)              recommendation of The LaTeX Project Team.
 (scrartcl)              Please replace `\ifthispageodd' by `\Ifthispageodd' on input line 57.
 
 [20])
-
 
 Class scrartcl Warning: Usage of deprecated command `\ifthispageodd'.
 (scrartcl)              The command has been renamed because of a
@@ -1605,10 +1543,7 @@ Overfull \hbox (9.52414pt too wide) in paragraph at lines 22--23
 []\T1/cmr/bx/n/10 Architecture doc-u-men-ta-tion: \T1/cmr/m/n/10 Asci-iDoc (\T1/cmtt/m/n/10 .adoc\T1/cmr/m/n/10 ) doc-u-ments au-thored per soft-ware unit/subsystem
  []
 
-
-
 [22]
-
 
 Class scrartcl Warning: Usage of deprecated command `\ifthispageodd'.
 (scrartcl)              The command has been renamed because of a
@@ -1617,14 +1552,12 @@ Class scrartcl Warning: Usage of deprecated command `\ifthispageodd'.
 
 [23]
 
-
 Class scrartcl Warning: Usage of deprecated command `\ifthispageodd'.
 (scrartcl)              The command has been renamed because of a
 (scrartcl)              recommendation of The LaTeX Project Team.
 (scrartcl)              Please replace `\ifthispageodd' by `\Ifthispageodd' on input line 89.
 
 [24])
-
 
 Class scrartcl Warning: Usage of deprecated command `\ifthispageodd'.
 (scrartcl)              The command has been renamed because of a
@@ -1634,10 +1567,7 @@ Class scrartcl Warning: Usage of deprecated command `\ifthispageodd'.
 [25] (6_Implementation/implementation.tex
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <12> not available
 (Font)              Font shape `T1/cmtt/m/n' tried instead on input line 33.
-
-
-[26]
-
+ [26]
 
 Class scrartcl Warning: Usage of deprecated command `\ifthispageodd'.
 (scrartcl)              The command has been renamed because of a
@@ -1645,7 +1575,6 @@ Class scrartcl Warning: Usage of deprecated command `\ifthispageodd'.
 (scrartcl)              Please replace `\ifthispageodd' by `\Ifthispageodd' on input line 64.
 
 [27]
-
 
 Class scrartcl Warning: Usage of deprecated command `\ifthispageodd'.
 (scrartcl)              The command has been renamed because of a
@@ -1658,15 +1587,12 @@ Overfull \hbox (42.56952pt too wide) in paragraph at lines 114--115
  []
 
 
-
-
 Class scrartcl Warning: Usage of deprecated command `\ifthispageodd'.
 (scrartcl)              The command has been renamed because of a
 (scrartcl)              recommendation of The LaTeX Project Team.
 (scrartcl)              Please replace `\ifthispageodd' by `\Ifthispageodd' on input line 118.
 
 [29]
-
 
 Class scrartcl Warning: Usage of deprecated command `\ifthispageodd'.
 (scrartcl)              The command has been renamed because of a
@@ -1675,7 +1601,6 @@ Class scrartcl Warning: Usage of deprecated command `\ifthispageodd'.
 
 [30]
 
-
 Class scrartcl Warning: Usage of deprecated command `\ifthispageodd'.
 (scrartcl)              The command has been renamed because of a
 (scrartcl)              recommendation of The LaTeX Project Team.
@@ -1683,14 +1608,12 @@ Class scrartcl Warning: Usage of deprecated command `\ifthispageodd'.
 
 [31]
 
-
 Class scrartcl Warning: Usage of deprecated command `\ifthispageodd'.
 (scrartcl)              The command has been renamed because of a
 (scrartcl)              recommendation of The LaTeX Project Team.
 (scrartcl)              Please replace `\ifthispageodd' by `\Ifthispageodd' on input line 207.
 
 [32])
-
 
 Class scrartcl Warning: Usage of deprecated command `\ifthispageodd'.
 (scrartcl)              The command has been renamed because of a
@@ -1702,10 +1625,7 @@ Overfull \hbox (1.06926pt too wide) in paragraph at lines 14--15
 []\T1/cmr/bx/n/10 Industrial rel-e-vance: \T1/cmr/m/n/10 as-sess whether de-tected is-sues align with re-viewer ex-pec-ta-tions and whether
  []
 
-
-
 [34]
-
 
 Class scrartcl Warning: Usage of deprecated command `\ifthispageodd'.
 (scrartcl)              The command has been renamed because of a
@@ -1714,14 +1634,12 @@ Class scrartcl Warning: Usage of deprecated command `\ifthispageodd'.
 
 [35]
 
-
 Class scrartcl Warning: Usage of deprecated command `\ifthispageodd'.
 (scrartcl)              The command has been renamed because of a
 (scrartcl)              recommendation of The LaTeX Project Team.
 (scrartcl)              Please replace `\ifthispageodd' by `\Ifthispageodd' on input line 152.
 
 [36]
-
 
 Class scrartcl Warning: Usage of deprecated command `\ifthispageodd'.
 (scrartcl)              The command has been renamed because of a
@@ -1730,16 +1648,12 @@ Class scrartcl Warning: Usage of deprecated command `\ifthispageodd'.
 
 [37])
 
-
 Class scrartcl Warning: Usage of deprecated command `\ifthispageodd'.
 (scrartcl)              The command has been renamed because of a
 (scrartcl)              recommendation of The LaTeX Project Team.
 (scrartcl)              Please replace `\ifthispageodd' by `\Ifthispageodd' on input line 38.
 
-[38] (8_Discussion/discussion.tex
-
-[39]
-
+[38] (8_Discussion/discussion.tex [39]
 
 Class scrartcl Warning: Usage of deprecated command `\ifthispageodd'.
 (scrartcl)              The command has been renamed because of a
@@ -1748,7 +1662,6 @@ Class scrartcl Warning: Usage of deprecated command `\ifthispageodd'.
 
 [40]
 
-
 Class scrartcl Warning: Usage of deprecated command `\ifthispageodd'.
 (scrartcl)              The command has been renamed because of a
 (scrartcl)              recommendation of The LaTeX Project Team.
@@ -1756,16 +1669,12 @@ Class scrartcl Warning: Usage of deprecated command `\ifthispageodd'.
 
 [41])
 
-
 Class scrartcl Warning: Usage of deprecated command `\ifthispageodd'.
 (scrartcl)              The command has been renamed because of a
 (scrartcl)              recommendation of The LaTeX Project Team.
 (scrartcl)              Please replace `\ifthispageodd' by `\Ifthispageodd' on input line 42.
 
-[42] (9_Conclusion/conclusion.tex
-
-[43]
-
+[42] (9_Conclusion/conclusion.tex [43]
 
 Class scrartcl Warning: Usage of deprecated command `\ifthispageodd'.
 (scrartcl)              The command has been renamed because of a
@@ -1773,7 +1682,6 @@ Class scrartcl Warning: Usage of deprecated command `\ifthispageodd'.
 (scrartcl)              Please replace `\ifthispageodd' by `\Ifthispageodd' on input line 69.
 
 [44])
-
 
 Class scrartcl Warning: Usage of deprecated command `\ifthispageodd'.
 (scrartcl)              The command has been renamed because of a
@@ -1785,8 +1693,6 @@ Class scrartcl Warning: Usage of deprecated command `\ifthispageodd'.
 Package natbib Warning: Empty `thebibliography' environment on input line 8.
 
 )
-
-
 pdfTeX warning (ext4): destination with the same identifier (name{page.VI}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
@@ -1802,22 +1708,22 @@ Package natbib Warning: There were undefined citations.
 
 (thesis.aux (titlepage.aux) (affidavit.aux) (acknowledgments.aux) (abstractEN.aux) (confidentialityClause.aux) (nomenclature.aux) (glossary.aux) (mainpart.aux))
  ***********
-LaTeX2e <2025-06-01> patch level 1
-L3 programming layer <2025-10-09>
+LaTeX2e <2025-11-01>
+L3 programming layer <2025-12-29>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 28043 strings out of 468080
- 573115 string characters out of 5426255
- 1200490 words of memory out of 5000000
- 55899 multiletter control sequences out of 15000+600000
+ 28007 strings out of 467871
+ 574132 string characters out of 5418860
+ 1205947 words of memory out of 5000000
+ 56131 multiletter control sequences out of 15000+600000
  647773 words of font info for 77 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 108i,21n,107p,11237b,708s stack positions out of 10000i,1000n,20000p,200000b,200000s
- <C:\Users\User\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1200.pk> <C:\Users\User\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1000.pk> <C:\Users\User\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1000.pk> <C:\Users\User\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1200.pk> <C:\Users\User\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1000.pk> <C:\Users\User\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1000.pk> <C:\Users\User\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecsx1095.pk> <C:\Users\User\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecsx1000.pk> <C:\Users\User\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1000.pk> <C:\Users\User\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecsc0900.pk> <C:\Users\User\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecxc1440.pk> <C:\Users\User\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1095.pk> <C:\Users\User\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1440.pk> <C:\Users\User\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1095.pk> <C:\Users\User\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx2074.pk><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on thesis.pdf (57 pages, 617945 bytes).
+ 108i,21n,107p,11256b,702s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ <C:\Users\user\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1200.pk> <C:\Users\user\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1000.pk> <C:\Users\user\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1000.pk> <C:\Users\user\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1200.pk> <C:\Users\user\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1000.pk> <C:\Users\user\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1000.pk> <C:\Users\user\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecsx1095.pk> <C:\Users\user\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecsx1000.pk> <C:\Users\user\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1000.pk> <C:\Users\user\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecsc0900.pk> <C:\Users\user\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecxc1440.pk> <C:\Users\user\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1095.pk> <C:\Users\user\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1440.pk> <C:\Users\user\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1095.pk> <C:\Users\user\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx2074.pk><C:/Users/user/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on thesis.pdf (57 pages, 610531 bytes).
 PDF statistics:
- 1916 PDF objects out of 2073 (max. 8388607)
- 378 named destinations out of 1000 (max. 500000)
+ 1844 PDF objects out of 2073 (max. 8388607)
+ 318 named destinations out of 1000 (max. 500000)
  1198 words of extra memory for PDF output out of 10000 (max. 10000000)
 
